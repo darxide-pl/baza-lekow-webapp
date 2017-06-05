@@ -66,4 +66,24 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+
+    public function error($msg = '', $data = []) {
+        die(json_encode([
+                'error' => $msg, 
+                'data' => $data
+            ]));
+    }
+
+    public function success($msg = '', $data = []) {
+        die(json_encode([
+                'success' => $msg,
+                'data' => $data
+            ]));
+    }
+
+    public function data($data = []) {
+        die(json_encode([
+                'data' => $data
+            ]));
+    }       
 }

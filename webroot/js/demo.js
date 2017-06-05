@@ -46,3 +46,60 @@ $(document).ready(function() {
     });
 });
 
+
+const flash = {
+    success : function(msg) {
+        $.growl({
+            message:msg
+        },{
+            allow_dismiss: true,
+            'placement':{
+                from:'bottom',
+                align:'left'
+            }
+        })  
+    }, 
+
+    error : function(msg) {
+        $.growl({
+            message:msg
+        },{
+            type:'danger',
+            allow_dismiss: true,
+            'placement':{
+                from:'bottom',
+                align:'left'
+            }
+        })  
+    }, 
+
+    auto : function() {
+        $( document ).ajaxComplete(function( event, xhr, settings ) {
+            try {
+                let response = JSON.parse(xhr.responseText)
+                flash.parse(response)
+            } catch(Exception) {
+                console.log('Cant read input as JOSN')
+            }
+        })  
+
+        $( document ).ajaxError(function( event, request, settings ) {
+            if (request.statusText =='abort') {
+                return;
+            }           
+            flash.error('Server fault')
+        })
+    }, 
+
+    parse : function(response) {
+        if(typeof response.error !== 'undefined') {
+            flash.error(response.error)
+        }
+
+        if(typeof response.success !== 'undefined') {
+            flash.success(response.success)
+        }       
+    }
+}
+
+flash.auto()
