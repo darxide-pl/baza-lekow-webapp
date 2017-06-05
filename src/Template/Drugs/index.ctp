@@ -4,7 +4,15 @@
 
 <div class="card">
     <div class="action-header palette-Teal-400 bg clearfix">
-        <div class="ah-label hidden-xs palette-White text"></div>
+        <div class="ah-label hidden-xs palette-White text">
+            <?php if($this->Filter->get('category')): ?>
+                <?= __('Aktywne filtry:') ?>
+                <a class="btn btn-default btn-xs" href="<?= $this->Filter->link('category','') ?>">
+                    <?= __('kategoria') ?>
+                    <i class="zmdi zmdi-close"></i>
+                </a>
+            <?php endif; ?>
+        </div>
 
         <div class="ah-search">
             <input type="text" placeholder="Start typing..." class="ahs-input">
@@ -90,10 +98,13 @@
 
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
-                                    <a href="#">Refresh</a>
+                                    <a href="#"><?= __('Szczegóły') ?></a>
                                 </li>
                                 <li>
-                                    <a href="#">Listview Settings</a>
+                                    <a href="#"><?= __('Komentarze') ?></a>
+                                </li>
+                                <li>
+                                    <a href="#"><?= __('Powiadom o aktualizacji') ?></a>
                                 </li>
                             </ul>
                         </li>
