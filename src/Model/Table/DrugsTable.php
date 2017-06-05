@@ -26,7 +26,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Drug[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Drug findOrCreate($search, callable $callback = null, $options = [])
  */
-class DrugTable extends Table
+class DrugsTable extends Table
 {
 
     /**
@@ -43,7 +43,14 @@ class DrugTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('DrugCategory', [
+
+        $this->belongsToMany('Categories' , [
+                'foreignKey' => 'drug_id', 
+                'targetForeignKey' => 'category_id', 
+                'joinTable' => 'drug_category'
+            ]);
+
+/*        $this->hasMany('DrugCategory', [
             'foreignKey' => 'drug_id'
         ]);
         $this->hasMany('DrugDescription', [
@@ -70,7 +77,7 @@ class DrugTable extends Table
             'foreignKey' => 'drug_id',
             'targetForeignKey' => 'tag_id',
             'joinTable' => 'drug_tag'
-        ]);
+        ]);*/
     }
 
     /**

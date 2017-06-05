@@ -32,6 +32,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <!-- CSS -->
     <link href="/css/app.min.1.css" rel="stylesheet">
     <link href="/css/app.min.2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body data-ma-header="teal">
     <?= $this->Flash->render() ?>
@@ -42,7 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->Element('sidebar') ?>
         <section id="content">
             <div class="container">        
-                <?= $this->fetch('footer') ?>
+                <?= $this->fetch('content') ?>
             </div>
             <?= $this->fetch('footer') ?>
         </section>
