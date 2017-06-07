@@ -4,18 +4,19 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 class DrugsController extends AppController
 {
 
 	public function index() {
-
-		$this->loadModel('Drugs');
 		
 		$config = [];
 		$config['join'] = [];
 		$config['conditions'] = [];
 		$config['group'] = [];
+
+		$substances = [];
 
 		if($this->Filter->get('category')) {
 			$config['join'][] = [
@@ -27,6 +28,29 @@ class DrugsController extends AppController
 					AND t1.category_id = '.(int)$this->Filter->get('category')
 				]
 			];
+		}
+
+
+		if(is_array($f = $this->Filter->get('substances'))) {
+			$this->loadModel('Substances');
+			foreach($f as $k => $v) {
+				$config['join'][] = [
+					'table' => 'drug_substance', 
+					'alias' => 'fs'.(int)$k, 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs'.(int)$k.'.drug_id 
+							AND fs'.(int)$k.'.substance_id ='.(int)$v
+					]
+				];
+			}
+
+			$substances = $this->Substances->find('list' , [
+					'conditions' => [
+						'id IN' => $f
+					]
+				])
+			->toArray();
 		}
 
 		if($this->Filter->get('search')) {
@@ -47,7 +71,7 @@ class DrugsController extends AppController
 				'group' => $config['group']
 			]);
 
-		$this->set(compact('drugs'));
+		$this->set(compact('drugs', 'substances'));
 
 	}
 
