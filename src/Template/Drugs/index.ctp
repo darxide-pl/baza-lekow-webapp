@@ -14,11 +14,16 @@
             <?php endif; ?>
         </div>
 
-        <div class="ah-search">
-            <input type="text" placeholder="Start typing..." class="ahs-input">
-
-            <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
-        </div>
+        <form method="get">
+            <div class="ah-search">
+                <input name="filter[search] type="text" placeholder="<?= h(__('Szukaj wg nazwy')) ?>" class="ahs-input">
+                <?php if($this->Filter->get('category')): ?>
+                    <input type="hidden" name="filter[category]" value="<?= (int) $this->Filter->get('category') ?>" />
+                <?php endif; ?>
+                <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
+                <button type="submit" class="hidden"></button>
+            </div>
+        </form>
 
         <ul class="ah-actions actions a-alt">
             <li>

@@ -14,6 +14,8 @@ class DrugsController extends AppController
 		
 		$config = [];
 		$config['join'] = [];
+		$config['conditions'] = [];
+		$config['group'] = [];
 
 		if($this->Filter->get('category')) {
 			$config['join'][] = [
@@ -27,11 +29,22 @@ class DrugsController extends AppController
 			];
 		}
 
+		if($this->Filter->get('search')) {
+
+			$config['conditions'][] = [
+				'Drugs.name LIKE' => '%'.$this->Filter->get('search').'%'
+			];
+
+			$config['group'] = ['Drugs.id'];
+		}
+
 		$drugs = $this->paginate('Drugs', [
 				'contain' => [
 					'Categories'
 				], 
-				'join' => $config['join']
+				'join' => $config['join'], 
+				'conditions' => $config['conditions'], 
+				'group' => $config['group']
 			]);
 
 		$this->set(compact('drugs'));
