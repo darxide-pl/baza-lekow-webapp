@@ -109,7 +109,7 @@
 
     <div class="media-body h-search">
         <form class="p-relative" method="get" action="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'index']) ?>">
-            <input type="text" name="filter[search]" class="hs-input" placeholder="<?= h(__('Szukaj wg nazwy leku')) ?>">
+            <input type="text" value="<?= h($this->Filter->get('search')) ?>" name="filter[search]" class="hs-input" placeholder="<?= h(__('Szukaj wg nazwy leku')) ?>">
             <i class="zmdi zmdi-search hs-reset" data-ma-action="search-clear"></i>
         </form>
     </div>

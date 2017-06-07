@@ -16,7 +16,7 @@
 
         <form method="get">
             <div class="ah-search">
-                <input name="filter[search] type="text" placeholder="<?= h(__('Szukaj wg nazwy')) ?>" class="ahs-input">
+                <input name="filter[search] type="text" value="<?= h($this->Filter->get('search')) ?>" placeholder="<?= h(__('Szukaj wg nazwy')) ?>" class="ahs-input">
                 <?php if($this->Filter->get('category')): ?>
                     <input type="hidden" name="filter[category]" value="<?= (int) $this->Filter->get('category') ?>" />
                 <?php endif; ?>
@@ -43,17 +43,15 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-header"><?= __('Sortowanie') ?></li>
                     <li>
-                        <a href="#">Last Modified</a>
+                        <?= $this->Paginator->sort('last_modify' , __('Wg daty aktualizacji')) ?>
                     </li>
                     <li>
-                        <a href="#">Last Edited</a>
+                        <?= $this->Paginator->sort('add_date' , __('Wg daty dodania')) ?>
                     </li>
                     <li>
-                        <a href="#">Name</a>
-                    </li>
-                    <li>
-                        <a href="#">Date</a>
+                        <?= $this->Paginator->sort('name' , __('Wg nazwy')) ?>
                     </li>
                 </ul>
             </li>
