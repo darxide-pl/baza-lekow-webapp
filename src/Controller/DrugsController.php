@@ -284,6 +284,24 @@ class DrugsController extends AppController
 							}, $f)).')'
 					]
 				];
+			}
+
+			/**
+			 *	NIE ZAWIERA ŻADNYCH Z ZAZNACZONYCH SPOSOBÓW LECZENIA
+			 * */
+			if($this->Filter->get('treatments_mode') == 'exclude') {
+				$config['join'][] = [
+					'table' => 'drug_treatment', 
+					'alias' => 'fs3', 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs3.drug_id 
+							AND fs3.treatment_id 
+							NOT IN ('.implode(',', array_map(function($item) {
+								return (int)$item;
+							}, $f)).')'
+					]
+				];					
 			}			
 
 			$treatments = $this->Treatments->find('list' , [

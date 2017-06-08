@@ -79,7 +79,8 @@ class SelectController extends AppController
         $list = $this->Treatments->find('list' , [
                 'conditions' => [
                     'name LIKE' => '%'.$term.'%'
-                ]
+                ], 
+                'limit' => 20
             ])
         ->toArray();
 

@@ -40,6 +40,13 @@
                     </a>
                 <?php endif; ?>                
 
+                <?php if($this->Filter->get('treatments')): ?>
+                    <a class="btn btn-default btn-xs" href="<?= $this->Filter->link('treatments','') ?>">
+                        <?= __('sposoby leczenia') ?>
+                        <i class="zmdi zmdi-close"></i>
+                    </a>
+                <?php endif; ?>                   
+
             <?php endif; ?>
         </div>
 

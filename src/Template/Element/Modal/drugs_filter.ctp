@@ -124,6 +124,13 @@
                                 <i class="input-helper"></i>
                                 <?= __('Znajdź leki zawierające KTÓRYKOLWIEK z zaznaczoncyh sposobów leczenia') ?>
                             </label>
+                        </div>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('treatments_mode') == 'exclude' ? 'checked=""' : '' ?> type="radio" name="filter[treatments_mode]" value="exclude" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki nie zawierające ŻADNYCH z zaznaczoncyh sposobów leczenia') ?>
+                            </label>
                         </div>                        
                     </div>
 
