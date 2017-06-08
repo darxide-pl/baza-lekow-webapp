@@ -19,6 +19,7 @@ class DrugsController extends AppController
 		$substances = [];
 		$specializations = [];
 		$forms = [];
+		$treatments = [];
 
 		if($this->Filter->get('category')) {
 			$config['join'][] = [
@@ -242,6 +243,39 @@ class DrugsController extends AppController
 			->toArray();
 		}
 
+		/**
+		 *	FILTROWANIE WG SPOSOBU DZIAŁANIA
+		 * */
+		if(is_array($f = $this->Filter->get('treatments'))) {
+
+			$this->loadModel('Treatments');
+			$config['group'] = ['Drugs.id'];
+
+			/**
+			 *	ZAWIERA WSZYSTKIE ZAZNACZONE FORMY LECZENIA
+			 * */
+			if($this->Filter->get('treatments_mode') == 'every') {
+				foreach($f as $k => $v) {
+					$config['join'][] = [
+						'table' => 'drug_treatment', 
+						'alias' => 'fs3'.(int)$k, 
+						'type' => 'inner', 
+						'conditions' => [
+							'Drugs.id = fs3'.(int)$k.'.drug_id 
+								AND fs3'.(int)$k.'.treatment_id ='.(int)$v
+						]
+					];
+				}
+			}
+
+			$treatments = $this->Treatments->find('list' , [
+					'conditions' => [
+						'id IN' => $f
+					]
+				])
+			->toArray();
+		}
+
 		if($this->Filter->get('search')) {
 
 			$config['conditions'][] = [
@@ -260,7 +294,7 @@ class DrugsController extends AppController
 				'group' => $config['group']
 			]);
 
-		$this->set(compact('drugs', 'substances', 'specializations', 'forms'));
+		$this->set(compact('drugs', 'substances', 'specializations', 'forms', 'treatments'));
 
 	}
 

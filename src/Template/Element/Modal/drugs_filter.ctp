@@ -99,6 +99,24 @@
                                 <i class="input-helper"></i>
                                 <?= __('Znajdź leki nie zawierające ŻADNEJ z zaznaczonych form') ?>
                             </label>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label><?= __('Sposoby leczenia') ?></label>
+                        <select name="filter[treatments][]" class="__treatments" multiple="">
+                            <?php if(count($treatments)):foreach($treatments as $k => $v): ?>
+                                <option selected="" value="<?= (int) $k ?>"><?= $v ?></option>
+                            <?php endforeach;endif; ?>
+                        </select>                        
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('treatments_mode') == 'every' ? 'checked=""' : '' ?> type="radio" checked="" name="filter[treatments_mode]" value="every" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone sposoby leczenia') ?>
+                            </label>
                         </div>                        
                     </div>
 
@@ -166,6 +184,27 @@ $(".__forms").select2({
     },        
     ajax: {
         url: '/select/forms',
+        dataType: 'json',
+        type: "GET",
+        quietMillis: 200,
+        data: function (term) {
+            return {
+                term: term
+            };
+        },
+        success: function (data) {                    
+            return data
+        }
+    }
+});  
+
+$(".__treatments").select2({
+    tags: true,
+    createTag: function(params) {
+        return undefined;
+    },        
+    ajax: {
+        url: '/select/treatments',
         dataType: 'json',
         type: "GET",
         quietMillis: 200,

@@ -8,7 +8,8 @@
             <?php if($this->Filter->get('category') || 
                     $this->Filter->get('substances') || 
                     $this->Filter->get('specializations') || 
-                    $this->Filter->get('forms')): ?>
+                    $this->Filter->get('forms') || 
+                    $this->Filter->get('treatments')): ?>
                 <?= __('Aktywne filtry:') ?>
 
                 <?php if($this->Filter->get('category')): ?>
@@ -53,6 +54,8 @@
                 <?= $this->Filter->input('specializations_mode') ?>
                 <?= $this->Filter->input('forms') ?>
                 <?= $this->Filter->input('forms_mode') ?>
+                <?= $this->Filter->input('treatments') ?>
+                <?= $this->Filter->input('treatments_mode') ?>                
 
                 <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
                 <button type="submit" class="hidden"></button>

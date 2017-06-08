@@ -71,6 +71,22 @@ class SelectController extends AppController
 
     }
 
+    public function treatments() {
+        
+        $this->loadModel('Treatments');
+        $term = $_GET['term']['term'] ?? '';
+
+        $list = $this->Treatments->find('list' , [
+                'conditions' => [
+                    'name LIKE' => '%'.$term.'%'
+                ]
+            ])
+        ->toArray();
+
+        $this->_response($list);
+
+    }
+
 	private function _response($list = []) {
 		
         $options = [];

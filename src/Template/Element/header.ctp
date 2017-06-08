@@ -117,6 +117,8 @@
             <?= $this->Filter->input('specializations_mode') ?>
             <?= $this->Filter->input('forms') ?>
             <?= $this->Filter->input('forms_mode') ?>            
+            <?= $this->Filter->input('treatments') ?>
+            <?= $this->Filter->input('treatments_mode') ?>
             <i class="zmdi zmdi-search hs-reset" data-ma-action="search-clear"></i>
         </form>
     </div>
