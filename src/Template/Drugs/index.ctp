@@ -6,7 +6,8 @@
     <div class="action-header palette-Teal-400 bg clearfix">
         <div class="ah-label hidden-xs palette-White text">
             <?php if($this->Filter->get('category') || 
-                    $this->Filter->get('substances')): ?>
+                    $this->Filter->get('substances') || 
+                    $this->Filter->get('specializations')): ?>
                 <?= __('Aktywne filtry:') ?>
 
                 <?php if($this->Filter->get('category')): ?>
@@ -23,6 +24,12 @@
                     </a>
                 <?php endif; ?>
 
+                <?php if($this->Filter->get('specializations')): ?>
+                    <a class="btn btn-default btn-xs" href="<?= $this->Filter->link('specializations','') ?>">
+                        <?= __('specjalizacja leku') ?>
+                        <i class="zmdi zmdi-close"></i>
+                    </a>
+                <?php endif; ?>                
 
             <?php endif; ?>
         </div>
@@ -34,6 +41,8 @@
                 <?= $this->Filter->input('category') ?>
                 <?= $this->Filter->input('substances') ?>
                 <?= $this->Filter->input('substances_mode') ?>
+                <?= $this->Filter->input('specializations') ?>
+                <?= $this->Filter->input('specializations_mode') ?>
 
                 <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
                 <button type="submit" class="hidden"></button>
@@ -163,56 +172,7 @@
     </div>
 </div>
 
-<div id="filter" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <form method="get" action="">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><?= __('Filtry listy leków') ?></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <?php if($this->Filter->get('search')): ?>
-                            <input type="hidden" name="filter[search]" value="<?= h($this->Filter->get('search')) ?>" />
-                        <?php endif; ?>
-                        <label><?= __('Substancje') ?></label>
-                        <select name="filter[substances][]" class="__substances" multiple="">
-                            <?php if(count($substances)):foreach($substances as $k => $v): ?>
-                                <option selected="" value="<?= (int) $k ?>"><?= $v ?></option>
-                            <?php endforeach;endif; ?>
-                        </select>
-                        <div class="radio m-b-15">
-                            <label>
-                                <input <?= $this->Filter->get('substances_mode') == 'every' ? 'checked=""' : '' ?> type="radio" checked="" name="filter[substances_mode]" value="every" />
-                                <i class="input-helper"></i>
-                                <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone substancje') ?>
-                            </label>
-                        </div>
-                        <div class="radio m-b-15">
-                            <label>
-                                <input <?= $this->Filter->get('substances_mode') == 'any' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="any" />
-                                <i class="input-helper"></i>
-                                <?= __('Znajdź leki zawierające KTÓRĄKOLWIEK z zaznaczonych subtancji') ?>
-                            </label>
-                        </div>
-                        <div class="radio m-b-15">
-                            <label>
-                                <input <?= $this->Filter->get('substances_mode') == 'exclude' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="exclude" />
-                                <i class="input-helper"></i>
-                                <?= __('Znajdź leki nie zawierające ŻADNEJ z zaznaczonych substancji') ?>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default wawes-effect" data-dismiss="modal"><?= __('Zamknij') ?></button>
-                    <button type="submit" class="btn bgm-teal wawes-effect"><?= __('Filtruj') ?></button>
-                </div>
-            </div>            
-        </form>
-    </div>
-</div>
+<?= $this->Element('Modal/drugs_filter') ?>
 
 <?= $this->start('bottom') ?>
 <script src="/vendors/select2/select2.min.js"></script>
@@ -238,5 +198,26 @@ $(".__substances").select2({
         }
     }
 });      
+
+$(".__specializations").select2({
+    tags: true,
+    createTag: function(params) {
+        return undefined;
+    },        
+    ajax: {
+        url: '/select/specializations',
+        dataType: 'json',
+        type: "GET",
+        quietMillis: 200,
+        data: function (term) {
+            return {
+                term: term
+            };
+        },
+        success: function (data) {                    
+            return data
+        }
+    }
+});  
 </script>
 <?= $this->end() ?>

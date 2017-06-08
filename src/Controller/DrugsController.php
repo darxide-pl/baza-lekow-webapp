@@ -17,6 +17,7 @@ class DrugsController extends AppController
 		$config['group'] = [];
 
 		$substances = [];
+		$specializations = [];
 
 		if($this->Filter->get('category')) {
 			$config['join'][] = [
@@ -101,6 +102,40 @@ class DrugsController extends AppController
 			
 		}
 
+		/**
+		 *	FILTROWANIE LEKÓW WG SPECIALIZACJI
+		 * */
+		if(is_array($f = $this->Filter->get('specializations'))) {
+
+			$this->loadModel('Specializations');
+			$config['group'] = ['Drugs.id'];
+
+			/**
+			 *	ZAWIERAJĄ WSZYSTKIE ZAZNACZONE SPECJALIZACJE
+			 * */
+			if($this->Filter->get('specializations_mode') == 'every') {
+				foreach($f as $k => $v) {
+					$config['join'][] = [
+						'table' => 'drug_specialization', 
+						'alias' => 'fs1'.(int)$k, 
+						'type' => 'inner', 
+						'conditions' => [
+							'Drugs.id = fs1'.(int)$k.'.drug_id 
+								AND fs1'.(int)$k.'.specialization_id ='.(int)$v
+						]
+					];
+				}
+			}
+
+			$specializations = $this->Specializations->find('list' , [
+						'conditions' => [
+							'id IN' => $f
+						]
+					])
+				->toArray();
+
+		}
+
 		if($this->Filter->get('search')) {
 
 			$config['conditions'][] = [
@@ -119,7 +154,7 @@ class DrugsController extends AppController
 				'group' => $config['group']
 			]);
 
-		$this->set(compact('drugs', 'substances'));
+		$this->set(compact('drugs', 'substances', 'specializations'));
 
 	}
 

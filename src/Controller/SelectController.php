@@ -33,6 +33,27 @@ class SelectController extends AppController
 
 	}
 
+    public function specializations() {
+        
+        $config = []; 
+        $config['conditions'] = [];
+        $this->loadModel('specializations');
+
+        $term = $_GET['term']['term'] ?? '';
+
+        $list = $this->specializations->find('list' , [
+                    'keyField' => 'id', 
+                    'valueField' => 'name', 
+                    'conditions' => [
+                        'name LIKE' => '%'.$term.'%'
+                    ]
+                ])
+            ->toArray();
+
+        $this->_response($list);
+
+    }
+
 	private function _response($list = []) {
 		
         $options = [];
