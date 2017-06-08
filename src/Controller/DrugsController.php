@@ -31,11 +31,17 @@ class DrugsController extends AppController
 		}
 
 
+		/**
+		 *	FILTROWANIE WG SUBSTANCJI
+		 * */
 		if(is_array($f = $this->Filter->get('substances'))) {
 			
 			$this->loadModel('Substances');
 			$config['group'] = ['Drugs.id'];
-			
+
+			/**
+			 *	ZAWIERA WSZYSTKIE ZAZNACZONE SUBSTANCJE
+			 * */
 			if($this->Filter->get('substances_mode') == 'every') {
 				foreach($f as $k => $v) {
 					$config['join'][] = [
@@ -50,6 +56,9 @@ class DrugsController extends AppController
 				}				
 			}
 
+			/**
+			 *	ZAWIERA KTÓRĄKOLWIEK Z ZAZNACZONYCH SUBSTANCJI
+			 * */
 			if($this->Filter->get('substances_mode') == 'any') {
 				$config['join'][] = [
 					'table' => 'drug_substance', 
@@ -65,6 +74,9 @@ class DrugsController extends AppController
 				];				
 			}
 
+			/**
+			 *	NIE ZAWIERA ŻADNEJ Z ZAZNACZONYCH SUBSTANCJI
+			 * */
 			if($this->Filter->get('substances_mode') == 'exclude') {
 				$config['join'][] = [
 					'table' => 'drug_substance', 
