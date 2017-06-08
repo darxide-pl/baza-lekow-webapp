@@ -204,7 +204,7 @@
                             <label>
                                 <input <?= $this->Filter->get('substances_mode') == 'exclude' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="exclude" />
                                 <i class="input-helper"></i>
-                                <?= __('Znajdź leki nie zawierające zaznaczonych substancji') ?>
+                                <?= __('Znajdź leki nie zawierające ŻADNEJ z zaznaczonych substancji') ?>
                             </label>
                         </div>
                     </div>

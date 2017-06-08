@@ -34,6 +34,8 @@ class DrugsController extends AppController
 		if(is_array($f = $this->Filter->get('substances'))) {
 			
 			$this->loadModel('Substances');
+			$config['group'] = ['Drugs.id'];
+			
 			if($this->Filter->get('substances_mode') == 'every') {
 				foreach($f as $k => $v) {
 					$config['join'][] = [
@@ -63,12 +65,28 @@ class DrugsController extends AppController
 				];				
 			}
 
+			if($this->Filter->get('substances_mode') == 'exclude') {
+				$config['join'][] = [
+					'table' => 'drug_substance', 
+					'alias' => 'fs', 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs.drug_id 
+							AND fs.substance_id 
+							NOT IN ('.implode(',', array_map(function($item) {
+								return (int)$item;
+							}, $this->Filter->get('substances'))).')'
+					]
+				];				
+			}			
+
 			$substances = $this->Substances->find('list' , [
 					'conditions' => [
 						'id IN' => $f
 					]
 				])
 			->toArray();
+			
 		}
 
 		if($this->Filter->get('search')) {
