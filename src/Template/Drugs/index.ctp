@@ -7,7 +7,8 @@
         <div class="ah-label hidden-xs palette-White text">
             <?php if($this->Filter->get('category') || 
                     $this->Filter->get('substances') || 
-                    $this->Filter->get('specializations')): ?>
+                    $this->Filter->get('specializations') || 
+                    $this->Filter->get('forms')): ?>
                 <?= __('Aktywne filtry:') ?>
 
                 <?php if($this->Filter->get('category')): ?>

@@ -85,6 +85,13 @@
                                 <i class="input-helper"></i>
                                 <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone formy') ?>
                             </label>
+                        </div>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('forms_mode') == 'any' ? 'checked=""' : '' ?> type="radio" name="filter[forms_mode]" value="any" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające KTÓRĄKOLWIEK z zaznaczonych form') ?>
+                            </label>
                         </div>                        
                     </div>
 

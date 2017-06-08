@@ -198,6 +198,24 @@ class DrugsController extends AppController
 				}
 			}
 
+			/**
+			 *	ZAWIERA KTÓRĄKOLWIEK Z ZAZNACZONYCH FORM
+			 * */
+			if($this->Filter->get('forms_mode') == 'any') {
+				$config['join'][] = [
+					'table' => 'drug_form', 
+					'alias' => 'fs2', 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs2.drug_id 
+							AND fs2.form_id 
+							IN ('.implode(',', array_map(function($item) {
+								return (int)$item;
+							}, $f)).')'
+					]
+				];					
+			}
+
 			$forms = $this->Forms->find('list' , [
 					'conditions' => [
 						'id IN' => $f
