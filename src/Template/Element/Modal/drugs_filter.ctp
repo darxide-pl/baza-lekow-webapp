@@ -61,6 +61,13 @@
                                 <?= __('Znajdź leki zawierające KTÓRĄKOLWIEK z zaznaczonych specjalizacji') ?>
                             </label>                            
                         </div>                        
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('specializations_mode') == 'exclude' ? 'checked=""' : '' ?> type="radio"  name="filter[specializations_mode]" value="exclude" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki nie zawierające ŻADNEJ z zaznaczonych specjalizacji') ?>
+                            </label>                            
+                        </div>                         
                     </div>
 
                 </div>

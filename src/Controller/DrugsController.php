@@ -144,7 +144,25 @@ class DrugsController extends AppController
 							}, $f)).')'
 					]
 				];				
-			}			
+			}
+
+			/**
+			 *	NIE ZAWIERA ŻADNEJ Z ZAZNACZONYCH SPECJALIZACJI
+			 * */
+			if($this->Filter->get('specializations_mode') == 'exclude') {
+				$config['join'][] = [
+					'table' => 'drug_specialization', 
+					'alias' => 'fs1', 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs1.drug_id 
+							AND fs1.specialization_id 
+							NOT IN ('.implode(',', array_map(function($item) {
+								return (int)$item;
+							}, $f)).')'
+					]
+				];				
+			}				
 
 			$specializations = $this->Specializations->find('list' , [
 						'conditions' => [
