@@ -92,6 +92,13 @@
                                 <i class="input-helper"></i>
                                 <?= __('Znajdź leki zawierające KTÓRĄKOLWIEK z zaznaczonych form') ?>
                             </label>
+                        </div>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('forms_mode') == 'exclude' ? 'checked=""' : '' ?> type="radio" name="filter[forms_mode]" value="exclude" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki nie zawierające ŻADNEJ z zaznaczonych form') ?>
+                            </label>
                         </div>                        
                     </div>
 

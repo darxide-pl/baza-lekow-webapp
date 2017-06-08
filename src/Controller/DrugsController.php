@@ -213,6 +213,24 @@ class DrugsController extends AppController
 								return (int)$item;
 							}, $f)).')'
 					]
+				];
+			}
+
+			/**
+			 *	NIE ZAWIERA ŻADNEJ Z ZAZNACZONYCH FORM
+			 * */
+			if($this->Filter->get('forms_mode') == 'exclude') {
+				$config['join'][] = [
+					'table' => 'drug_form', 
+					'alias' => 'fs2', 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs2.drug_id 
+							AND fs2.form_id 
+							NOT IN ('.implode(',', array_map(function($item) {
+								return (int)$item;
+							}, $f)).')'
+					]
 				];					
 			}
 
