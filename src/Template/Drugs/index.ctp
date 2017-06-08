@@ -31,13 +31,9 @@
             <div class="ah-search">
                 <input name="filter[search] type="text" value="<?= h($this->Filter->get('search')) ?>" placeholder="<?= h(__('Szukaj wg nazwy')) ?>" class="ahs-input">
 
-                <?php if($this->Filter->get('category')): ?>
-                    <input type="hidden" name="filter[category]" value="<?= (int) $this->Filter->get('category') ?>" />
-                <?php endif; ?>
-
-                <?php if(is_array($h = $this->Filter->get('substances'))):foreach($f as $v): ?>
-                    <input type="hidden" name="filter[substances][]" value="<?= (int)$v ?>" />
-                <?php endforeach;endif; ?>
+                <?= $this->Filter->input('category') ?>
+                <?= $this->Filter->input('substances') ?>
+                <?= $this->Filter->input('substances_mode') ?>
 
                 <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
                 <button type="submit" class="hidden"></button>
@@ -188,7 +184,7 @@
                         </select>
                         <div class="radio m-b-15">
                             <label>
-                                <input <?= $this->Filter->get('substances_mode') == 'every' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="every" />
+                                <input <?= $this->Filter->get('substances_mode') == 'every' ? 'checked=""' : '' ?> type="radio" checked="" name="filter[substances_mode]" value="every" />
                                 <i class="input-helper"></i>
                                 <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone substancje') ?>
                             </label>
