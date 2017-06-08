@@ -115,7 +115,14 @@
                             <label>
                                 <input <?= $this->Filter->get('treatments_mode') == 'every' ? 'checked=""' : '' ?> type="radio" checked="" name="filter[treatments_mode]" value="every" />
                                 <i class="input-helper"></i>
-                                <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone sposoby leczenia') ?>
+                                <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone sposobów leczenia') ?>
+                            </label>
+                        </div>                        
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('treatments_mode') == 'any' ? 'checked=""' : '' ?> type="radio" name="filter[treatments_mode]" value="any" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające KTÓRYKOLWIEK z zaznaczoncyh sposobów leczenia') ?>
                             </label>
                         </div>                        
                     </div>

@@ -252,7 +252,7 @@ class DrugsController extends AppController
 			$config['group'] = ['Drugs.id'];
 
 			/**
-			 *	ZAWIERA WSZYSTKIE ZAZNACZONE FORMY LECZENIA
+			 *	ZAWIERA WSZYSTKIE ZAZNACZONE SPOSOBY LECZENIA
 			 * */
 			if($this->Filter->get('treatments_mode') == 'every') {
 				foreach($f as $k => $v) {
@@ -267,6 +267,24 @@ class DrugsController extends AppController
 					];
 				}
 			}
+
+			/**
+			 *	ZAWEIERA KTÓRYKOLWIEK Z ZAZNACZONYCH SPOSOBÓW LECZENIA
+			 * */
+			if($this->Filter->get('treatments_mode') == 'any') {
+				$config['join'][] = [
+					'table' => 'drug_treatment', 
+					'alias' => 'fs3', 
+					'type' => 'inner', 
+					'conditions' => [
+						'Drugs.id = fs3.drug_id 
+							AND fs3.treatment_id 
+							IN ('.implode(',', array_map(function($item) {
+								return (int)$item;
+							}, $f)).')'
+					]
+				];
+			}			
 
 			$treatments = $this->Treatments->find('list' , [
 					'conditions' => [
