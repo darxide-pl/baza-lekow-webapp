@@ -53,6 +53,13 @@
                                 <i class="input-helper"></i>
                                 <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone specjalizacje') ?>
                             </label>
+                        </div>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('specializations_mode') == 'any' ? 'checked=""' : '' ?> type="radio"  name="filter[specializations_mode]" value="any" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające KTÓRĄKOLWIEK z zaznaczonych specjalizacji') ?>
+                            </label>                            
                         </div>                        
                     </div>
 
