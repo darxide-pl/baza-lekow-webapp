@@ -70,6 +70,24 @@
                         </div>                         
                     </div>
 
+                    <hr>
+
+                    <div class="form-group">
+                        <label><?= __('Formy leków') ?></label>
+                        <select name="filter[forms][]" class="__forms" multiple="">
+                            <?php if(count($forms)):foreach($forms as $k => $v): ?>
+                                <option selected="" value="<?= (int) $k ?>"><?= $v ?></option>
+                            <?php endforeach;endif; ?>
+                        </select>                         
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('forms_mode') == 'every' ? 'checked=""' : '' ?> type="radio" checked="" name="filter[forms_mode]" value="every" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone formy') ?>
+                            </label>
+                        </div>                        
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default wawes-effect" data-dismiss="modal"><?= __('Zamknij') ?></button>
@@ -79,3 +97,73 @@
         </form>
     </div>
 </div>
+
+<?= $this->start('bottom') ?>
+
+<script src="/vendors/select2/select2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/vendors/select2/select2.min.css" />
+<script type="text/javascript">     
+$(".__substances").select2({
+    tags: true,
+    createTag: function(params) {
+        return undefined;
+    },        
+    ajax: {
+        url: '/select/substances',
+        dataType: 'json',
+        type: "GET",
+        quietMillis: 200,
+        data: function (term) {
+            return {
+                term: term
+            };
+        },
+        success: function (data) {                    
+            return data
+        }
+    }
+});      
+
+$(".__specializations").select2({
+    tags: true,
+    createTag: function(params) {
+        return undefined;
+    },        
+    ajax: {
+        url: '/select/specializations',
+        dataType: 'json',
+        type: "GET",
+        quietMillis: 200,
+        data: function (term) {
+            return {
+                term: term
+            };
+        },
+        success: function (data) {                    
+            return data
+        }
+    }
+});  
+
+$(".__forms").select2({
+    tags: true,
+    createTag: function(params) {
+        return undefined;
+    },        
+    ajax: {
+        url: '/select/forms',
+        dataType: 'json',
+        type: "GET",
+        quietMillis: 200,
+        data: function (term) {
+            return {
+                term: term
+            };
+        },
+        success: function (data) {                    
+            return data
+        }
+    }
+});  
+</script>
+<?= $this->end() ?>

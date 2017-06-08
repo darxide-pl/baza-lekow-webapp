@@ -18,6 +18,7 @@ class DrugsController extends AppController
 
 		$substances = [];
 		$specializations = [];
+		$forms = [];
 
 		if($this->Filter->get('category')) {
 			$config['join'][] = [
@@ -170,7 +171,39 @@ class DrugsController extends AppController
 						]
 					])
 				->toArray();
+		}
 
+		/**
+		 *	FILTROWANIE WG FORMY LEKU
+		 * */
+		if(is_array($f = $this->Filter->get('forms'))) {
+
+			$this->loadModel('Forms');
+			$config['group'] = ['Drugs.id'];
+
+			/**
+			 *	ZAWIERA WSZYSTKIE ZAZNACZONE FORMY LEKU
+			 * */
+			if($this->Filter->get('forms_mode') == 'every') {
+				foreach($f as $k => $v) {
+					$config['join'][] = [
+						'table' => 'drug_form', 
+						'alias' => 'fs2'.(int)$k, 
+						'type' => 'inner', 
+						'conditions' => [
+							'Drugs.id = fs2'.(int)$k.'.drug_id 
+								AND fs2'.(int)$k.'.form_id ='.(int)$v
+						]
+					];
+				}
+			}
+
+			$forms = $this->Forms->find('list' , [
+					'conditions' => [
+						'id IN' => $f
+					]
+				])
+			->toArray();
 		}
 
 		if($this->Filter->get('search')) {
@@ -191,7 +224,7 @@ class DrugsController extends AppController
 				'group' => $config['group']
 			]);
 
-		$this->set(compact('drugs', 'substances', 'specializations'));
+		$this->set(compact('drugs', 'substances', 'specializations', 'forms'));
 
 	}
 

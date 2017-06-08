@@ -29,6 +29,13 @@
                         <?= __('specjalizacja leku') ?>
                         <i class="zmdi zmdi-close"></i>
                     </a>
+                <?php endif; ?>
+
+                <?php if($this->Filter->get('forms')): ?>
+                    <a class="btn btn-default btn-xs" href="<?= $this->Filter->link('forms','') ?>">
+                        <?= __('formy leku') ?>
+                        <i class="zmdi zmdi-close"></i>
+                    </a>
                 <?php endif; ?>                
 
             <?php endif; ?>
@@ -43,6 +50,8 @@
                 <?= $this->Filter->input('substances_mode') ?>
                 <?= $this->Filter->input('specializations') ?>
                 <?= $this->Filter->input('specializations_mode') ?>
+                <?= $this->Filter->input('forms') ?>
+                <?= $this->Filter->input('forms_mode') ?>
 
                 <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
                 <button type="submit" class="hidden"></button>
@@ -173,51 +182,3 @@
 </div>
 
 <?= $this->Element('Modal/drugs_filter') ?>
-
-<?= $this->start('bottom') ?>
-<script src="/vendors/select2/select2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/vendors/select2/select2.min.css" />
-<script type="text/javascript">     
-$(".__substances").select2({
-    tags: true,
-    createTag: function(params) {
-        return undefined;
-    },        
-    ajax: {
-        url: '/select/substances',
-        dataType: 'json',
-        type: "GET",
-        quietMillis: 200,
-        data: function (term) {
-            return {
-                term: term
-            };
-        },
-        success: function (data) {                    
-            return data
-        }
-    }
-});      
-
-$(".__specializations").select2({
-    tags: true,
-    createTag: function(params) {
-        return undefined;
-    },        
-    ajax: {
-        url: '/select/specializations',
-        dataType: 'json',
-        type: "GET",
-        quietMillis: 200,
-        data: function (term) {
-            return {
-                term: term
-            };
-        },
-        success: function (data) {                    
-            return data
-        }
-    }
-});  
-</script>
-<?= $this->end() ?>

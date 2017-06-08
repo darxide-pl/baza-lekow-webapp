@@ -113,6 +113,10 @@
             <?= $this->Filter->input('category') ?>
             <?= $this->Filter->input('substances') ?>
             <?= $this->Filter->input('substances_mode') ?>            
+            <?= $this->Filter->input('specializations') ?>
+            <?= $this->Filter->input('specializations_mode') ?>
+            <?= $this->Filter->input('forms') ?>
+            <?= $this->Filter->input('forms_mode') ?>            
             <i class="zmdi zmdi-search hs-reset" data-ma-action="search-clear"></i>
         </form>
     </div>

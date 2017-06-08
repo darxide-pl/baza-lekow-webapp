@@ -25,7 +25,7 @@ class SelectController extends AppController
                     'keyField' => 'id',
                     'valueField' => 'name',
                     'conditions' => $config['conditions'],
-                    'limit' => 20
+                    'limit' => 40
                 ])
             ->toArray();
 
@@ -35,18 +35,35 @@ class SelectController extends AppController
 
     public function specializations() {
         
-        $config = []; 
-        $config['conditions'] = [];
-        $this->loadModel('specializations');
 
+        $this->loadModel('Specializations');
         $term = $_GET['term']['term'] ?? '';
 
-        $list = $this->specializations->find('list' , [
+        $list = $this->Specializations->find('list' , [
                     'keyField' => 'id', 
                     'valueField' => 'name', 
                     'conditions' => [
                         'name LIKE' => '%'.$term.'%'
                     ]
+                ])
+            ->toArray();
+
+        $this->_response($list);
+
+    }
+
+    public function forms() {
+        
+        $this->loadModel('Forms');
+        $term = $_GET['term']['term'] ?? '';
+
+        $list = $this->Forms->find('list' , [
+                    'keyField' => 'id', 
+                    'valueField' => 'name', 
+                    'conditions' => [
+                        'name LIKE' => '%'.$term.'%'
+                    ], 
+                    'limit' => 20
                 ])
             ->toArray();
 
