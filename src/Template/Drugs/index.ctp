@@ -186,6 +186,27 @@
                                 <option selected="" value="<?= (int) $k ?>"><?= $v ?></option>
                             <?php endforeach;endif; ?>
                         </select>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('substances_mode') == 'every' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="every" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające WSZYSTKIE zaznaczone substancje') ?>
+                            </label>
+                        </div>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('substances_mode') == 'any' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="any" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki zawierające KTÓRĄKOLWIEK z zaznaczonych subtancji') ?>
+                            </label>
+                        </div>
+                        <div class="radio m-b-15">
+                            <label>
+                                <input <?= $this->Filter->get('substances_mode') == 'exclude' ? 'checked=""' : '' ?> type="radio" name="filter[substances_mode]" value="exclude" />
+                                <i class="input-helper"></i>
+                                <?= __('Znajdź leki nie zawierające zaznaczonych substancji') ?>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
