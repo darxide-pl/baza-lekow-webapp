@@ -1,8 +1,20 @@
 <aside id="s-user-alerts" class="sidebar">
     <ul class="tab-nav tn-justified tn-icon m-t-10" data-tab-color="teal">
-        <li><a class="sua-messages" href="#sua-messages" data-toggle="tab"><i class="zmdi zmdi-email"></i></a></li>
-        <li><a class="sua-notifications" href="#sua-notifications" data-toggle="tab"><i class="zmdi zmdi-notifications"></i></a></li>
-        <li><a class="sua-tasks" href="#sua-tasks" data-toggle="tab"><i class="zmdi zmdi-view-list-alt"></i></a></li>
+        <li>
+            <a class="sua-messages" href="#sua-messages" data-toggle="tab">
+                <i class="fa fa-fw fa-envelope"></i>
+            </a>
+        </li>
+        <li>
+            <a class="sua-notifications" href="#sua-notifications" data-toggle="tab">
+                <i class="fa fa-fw fa-bell"></i>
+            </a>
+        </li>
+        <li>
+            <a class="sua-tasks" href="#sua-tasks" data-toggle="tab">
+                <i class="fa fa-fw fa-bug"></i>
+            </a>
+        </li>
     </ul>
 
     <div class="tab-content">
@@ -132,62 +144,40 @@
         </div>
         <div class="tab-pane fade" id="sua-tasks">
             <ul class="sua-menu list-inline list-unstyled palette-Green-400 bg">
-                <li><a href="#"><i class="zmdi zmdi-time"></i> Archived</a></li>
-                <li><a href="#"><i class="zmdi zmdi-check-all"></i> Mark all</a></li>
-                <li><a href="#" data-ma-action="sidebar-close"><i class="zmdi zmdi-close"></i> Close</a></li>
+                <li><a href="#"><i class="zmdi zmdi-time"></i> <?= __('Ostatnie aktualizacje bazy') ?></a></li>
+                <li><a href="#" data-ma-action="sidebar-close"><i class="zmdi zmdi-close"></i> <?= __('Zamknij') ?></a></li>
             </ul>
 
             <div class="list-group lg-alt c-overflow">
-                <div class="list-group-item">
-                    <div class="lgi-heading m-b-5">HTML5 Validation Report</div>
-
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                            <span class="sr-only">95% Complete (success)</span>
+                
+                <?php if(count($robots)):foreach($robots as $v): ?>
+                    <div class="list-group-item">
+                        <?php if($v->end_date): ?>
+                            <div class="lgi-heading m-b-5">
+                                <i class="fa fa-fw fa-check"></i> <?= __('Skan zakończony') ?>
+                            </div>
+                            <small class="robot-info">
+                                <?= __('{0} - {1} <br> Przeskanowane leki: {2}', [
+                                    $v->start_date->i18nFormat('y-MM-dd'),
+                                    $v->end_date->i18nFormat('y-MM-dd'),
+                                    $v->drugs
+                                ]) ?>
+                            </small>
+                        <?php else: ?>
+                            <div class="lgi-heading m-b-5">
+                                <i class="fa fa-fw fa-clock-o"></i> <?= __('Trwa') ?>
+                            </div>
+                            <small class="robot-info">
+                                <?= __('Przeskanowane leki: {0}', [$v->drugs]) ?>
+                            </small>
+                        <?php endif; ?>
+                        <div class="progress">
+                            <div class="progress-bar <?= $v->end_date ? 'progress-bar-success' : 'progress-bar-warning' ?>" role="progressbar" style="width: <?= $v->end_date ? '100%' : $v->drugs / $robots_avg * 100 .'%'; ?>">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="lgi-heading m-b-5">Google Chrome Extension</div>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                            <span class="sr-only">80% Complete (success)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="lgi-heading m-b-5">Social Intranet Projects</div>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                            <span class="sr-only">20% Complete</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="lgi-heading m-b-5">Bootstrap Admin Template</div>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                            <span class="sr-only">60% Complete (warning)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="lgi-heading m-b-5">Youtube Client App</div>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                            <span class="sr-only">80% Complete (danger)</span>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach;endif; ?>
             </div>
-
-            <a href="#" class="btn btn-float btn-danger m-btn">
-                <i class="zmdi zmdi-plus"></i>
-            </a>
         </div>
     </div>
 </aside>

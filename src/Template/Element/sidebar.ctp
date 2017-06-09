@@ -5,13 +5,13 @@
 
     <ul class="smm-alerts">
         <li data-user-alert="sua-messages" data-ma-action="sidebar-open" data-ma-target="user-alerts">
-            <i class="zmdi zmdi-email"></i>
+            <i class="fa fa-fw fa-envelope"></i>
         </li>
         <li data-user-alert="sua-notifications" data-ma-action="sidebar-open" data-ma-target="user-alerts">
-            <i class="zmdi zmdi-notifications"></i>
+            <i class="fa fa-fw fa-bell"></i>
         </li>
         <li data-user-alert="sua-tasks" data-ma-action="sidebar-open" data-ma-target="user-alerts">
-            <i class="zmdi zmdi-view-list-alt"></i>
+            <i class="fa fa-fw fa-bug"></i>
         </li>
     </ul>
 

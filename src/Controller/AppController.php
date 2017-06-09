@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Cache\Cache;
 
 /**
  * Application Controller
@@ -44,6 +45,37 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Filter');
+
+        if (($robots_avg = Cache::read('robots_avg', 'halfhour')) === false) {
+
+            $this->loadModel('Robots');
+            $query = $this->Robots->find('all' , [
+                    'fields' => [
+                        'avg' => 'ROUND(SUM(drugs) / count(id), 2)'
+                    ]
+                ])
+            ->first();
+
+            $robots_avg = $query->avg;
+            Cache::write('robots_avg', $query->avg, 'halfhour');
+        }
+
+        if(($robots = Cache::read('robots', 'halfhour')) === false) {
+
+            $this->loadModel('Robots');
+            $query = $this->Robots->find('all' , [
+                    'order' => [
+                        'id' => 'DESC'
+                    ], 
+                    'limit' => 5
+                ])
+            ->toArray();
+
+            $robots = $query;
+            Cache::write('robots' , $query, 'halfhour');
+        }
+
+        $this->set(compact('robots_avg', 'robots'));
 
         /*
          * Enable the following components for recommended CakePHP security settings.
