@@ -40,13 +40,19 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a href="#"><?= __('Pokaż leki zawierające wszystkie zaznaczone substancje') ?></a>
+                        <a href="#" class="btn-action" data-controller="substances" data-action="filter_every">
+                            <?= __('Pokaż leki zawierające wszystkie zaznaczone substancje') ?>    
+                        </a>
                     </li>
                     <li>
-                        <a href="#"><?= __('Pokaż leki zawierające dowolną z zaznaczonych substancji') ?></a>
+                        <a href="#" class="btn-action" data-controller="substances" data-action="filter_any">
+                            <?= __('Pokaż leki zawierające dowolną z zaznaczonych substancji') ?>        
+                        </a>
                     </li>
                     <li>
-                        <a href="#"><?= __('Pokaż leki nie zawierające żadnej z zaznaczonych substancji') ?></a>
+                        <a href="#" class="btn-action" data-controller="substances" data-action="filter_exclude">
+                            <?= __('Pokaż leki nie zawierające żadnej z zaznaczonych substancji') ?>    
+                        </a>
                     </li>                    
                 </ul>
             </li>
@@ -59,7 +65,7 @@
             <div class="list-group-item media">
                 <div class="checkbox pull-left lgi-checkbox">
                     <label>
-                        <input type="checkbox" value="">
+                        <input type="checkbox" class="__check" value="<?= $v->id ?>" />
                         <i class="input-helper"></i>
                     </label>
                 </div>

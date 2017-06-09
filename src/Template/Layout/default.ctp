@@ -74,7 +74,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <script src="/js/functions.js"></script>
     <script src="/js/actions.js"></script>
-    <script src="/js/demo.js"></script>    
+    <script src="/js/demo.js"></script>  
+    <script src="/js/index.js"></script>  
     <?= $this->fetch('bottom') ?>
 </body>
 </html>
