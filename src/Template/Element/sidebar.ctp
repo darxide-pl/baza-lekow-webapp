@@ -30,6 +30,11 @@
             <a href="<?= $this->Url->build(['controller' => 'Substances', 'action' => 'index']) ?>">
                 <i class="fa fa-fw fa-flask"></i> <?= __('Substancje') ?>
             </a>
+        </li>
+        <li>
+            <a href="<?= $this->Url->build(['controller' => 'Forms', 'action' => 'index']) ?>">
+                <i class="fa fa-fw fa-medkit"></i> <?= __('Formy leków') ?>
+            </a>
         </li>        
     </ul>
 </aside>

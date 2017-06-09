@@ -62,6 +62,28 @@ const actions = {
 
     },
 
+    forms : {
+
+        filter_every : function(e) {
+            actions.helper.bulk_form('/' , '.__check:checked' , 'filter[forms][]', function(form) {
+                form.append('<input type="hidden" name="filter[forms_mode]" value="every" />')
+            })
+        }, 
+
+        filter_any : function(e) {
+            actions.helper.bulk_form('/' , '.__check:checked' , 'filter[forms][]', function(form) {
+                form.append('<input type="hidden" name="filter[forms_mode]" value="any" />')
+            })            
+        }, 
+
+        filter_exclude : function(e) {
+            actions.helper.bulk_form('/' , '.__check:checked' , 'filter[forms][]', function(form) {
+                form.append('<input type="hidden" name="filter[forms_mode]" value="exclude" />')
+            })            
+        }
+
+    },
+
     helper : {
         /**
          *  create and submit bulk form
