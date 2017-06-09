@@ -25,6 +25,11 @@
             <a href="<?= $this->Url->build(['controller' => 'Categories', 'action' => 'index']) ?>">
                 <i class="fa fa-fw fa-folder"></i> <?= __('Kategorie') ?>
             </a>
+        </li>
+        <li>
+            <a href="<?= $this->Url->build(['controller' => 'Substances', 'action' => 'index']) ?>">
+                <i class="fa fa-fw fa-flask"></i> <?= __('Substancje') ?>
+            </a>
         </li>        
     </ul>
 </aside>
