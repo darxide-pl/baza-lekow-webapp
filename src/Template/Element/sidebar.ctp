@@ -17,7 +17,14 @@
 
     <ul class="main-menu">
         <li>
-            <a href="<?= $this->Url->build('/') ?>"><i class="fa fa-fw fa-flask"></i> <?= __('Leki') ?></a>
+            <a href="<?= $this->Url->build('/') ?>">
+                <i class="fa fa-fw fa-flask"></i> <?= __('Leki') ?>
+            </a>
         </li>
+        <li>
+            <a href="<?= $this->Url->build(['controller' => 'Categories', 'action' => 'index']) ?>">
+                <i class="fa fa-fw fa-folder"></i> <?= __('Kategorie') ?>
+            </a>
+        </li>        
     </ul>
 </aside>
