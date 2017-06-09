@@ -35,6 +35,11 @@
             <a href="<?= $this->Url->build(['controller' => 'Forms', 'action' => 'index']) ?>">
                 <i class="fa fa-fw fa-medkit"></i> <?= __('Formy leków') ?>
             </a>
+        </li>
+        <li>
+            <a href="<?= $this->Url->build(['controller' => 'Specializations', 'action' => 'index']) ?>">
+                <i class="fa fa-fw fa-stethoscope"></i> <?= __('Specjalizacje') ?>
+            </a>
         </li>        
     </ul>
 </aside>

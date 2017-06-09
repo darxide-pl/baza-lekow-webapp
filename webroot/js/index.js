@@ -84,6 +84,28 @@ const actions = {
 
     },
 
+    specializations : {
+
+        filter_every : function(e) {
+            actions.helper.bulk_form('/' , '.__check:checked' , 'filter[specializations][]', function(form) {
+                form.append('<input type="hidden" name="filter[specializations_mode]" value="every" />')
+            })
+        }, 
+
+        filter_any : function(e) {
+            actions.helper.bulk_form('/' , '.__check:checked' , 'filter[specializations][]', function(form) {
+                form.append('<input type="hidden" name="filter[specializations_mode]" value="any" />')
+            })            
+        }, 
+
+        filter_exclude : function(e) {
+            actions.helper.bulk_form('/' , '.__check:checked' , 'filter[specializations][]', function(form) {
+                form.append('<input type="hidden" name="filter[specializations_mode]" value="exclude" />')
+            })            
+        }
+
+    },
+
     helper : {
         /**
          *  create and submit bulk form
