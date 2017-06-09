@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="pull-left">
-                    <div class="avatar-char palette-Light-Blue bg"><?= $v->name[0] ?></div>
+                    <div class="avatar-char palette-Light-Blue bg"><?= mb_substr($v->name, 0, 1) ?></div>
                 </div>
 
                 <div class="pull-right">
