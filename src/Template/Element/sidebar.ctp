@@ -40,6 +40,11 @@
             <a href="<?= $this->Url->build(['controller' => 'Specializations', 'action' => 'index']) ?>">
                 <i class="fa fa-fw fa-stethoscope"></i> <?= __('Specjalizacje') ?>
             </a>
+        </li>
+        <li>
+            <a href="<?= $this->Url->build(['controller' => 'Treatments', 'action' => 'index']) ?>">
+                <i class="fa fa-fw fa-heartbeat"></i> <?= __('Działania leków') ?>
+            </a>
         </li>        
     </ul>
 </aside>
