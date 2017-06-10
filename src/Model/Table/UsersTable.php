@@ -47,27 +47,6 @@ class UsersTable extends Table
             'foreignKey' => 'roles_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Logo', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('News', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('NewsCopy', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Page', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Slider', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('SystemLock', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('UserLoginHistory', [
-            'foreignKey' => 'user_id'
-        ]);
     }
 
     /**

@@ -46,6 +46,22 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Filter');
 
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'unauthorizedRedirect' => $this->referer() // If unauthorized, return them to page they were just on
+        ]);
+
         if (($robots_avg = Cache::read('robots_avg', 'halfhour')) === false) {
 
             $this->loadModel('Robots');

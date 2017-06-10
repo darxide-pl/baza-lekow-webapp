@@ -9,6 +9,10 @@ use Cake\ORM\TableRegistry;
 class SpecializationsController extends AppController
 {
 
+	public function beforeFilter(\Cake\Event\Event $event) {
+		$this->Auth->allow();
+	}
+
 	public function index() {
 		
 		$config = [];
