@@ -157,7 +157,7 @@
                                 <i class="fa fa-fw fa-check"></i> <?= __('Skan zakończony') ?>
                             </div>
                             <small class="robot-info">
-                                <?= __('{0} - {1} <br> Przeskanowane leki: {2}', [
+                                <?= __('{0} - {1} <br> Zaktualizowane leki: {2}', [
                                     $v->start_date->i18nFormat('y-MM-dd'),
                                     $v->end_date->i18nFormat('y-MM-dd'),
                                     $v->drugs
@@ -168,7 +168,7 @@
                                 <i class="fa fa-fw fa-clock-o"></i> <?= __('Trwa') ?>
                             </div>
                             <small class="robot-info">
-                                <?= __('Przeskanowane leki: {0}', [$v->drugs]) ?>
+                                <?= __('Zaktualizowane leki: {0}', [$v->drugs]) ?>
                             </small>
                         <?php endif; ?>
                         <div class="progress">
