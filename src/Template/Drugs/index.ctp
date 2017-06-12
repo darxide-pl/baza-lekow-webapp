@@ -98,11 +98,6 @@
                     <i class="zmdi zmdi-filter-list"></i>
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="zmdi zmdi-info"></i>
-                </a>
-            </li>
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown" aria-expanded="true">
                     <i class="zmdi zmdi-more-vert"></i>
@@ -110,10 +105,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a href="#">Refresh</a>
-                    </li>
-                    <li>
-                        <a href="#">Listview Settings</a>
+                        <a href="#"><?= __('Powiadom o aktualizacji zaznaczonych leków') ?></a>
                     </li>
                 </ul>
             </li>
