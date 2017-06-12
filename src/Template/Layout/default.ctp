@@ -36,7 +36,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body data-ma-header="teal">
-    <?= $this->Flash->render() ?>
 
     <?= $this->Element('header') ?>
     <section id="main">
@@ -77,5 +76,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <script src="/js/demo.js"></script>  
     <script src="/js/index.js"></script>  
     <?= $this->fetch('bottom') ?>
+    <?= $this->Flash->render() ?>    
 </body>
 </html>

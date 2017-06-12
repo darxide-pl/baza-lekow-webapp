@@ -69,6 +69,33 @@ class UsersController extends AppController
 
 	public function login() {
 		$this->viewBuilder()->setLayout('Login');
+
+        if ($this->request->is('post')) {
+
+        	$t = $this->request->getData();
+        	$user = $this->Users->findByEmail($t['email'])->first();
+
+        	if(is_null($user)) {
+        		$this->Flash->error(__('Nie znaleziono takiego użytkownika'));
+        		return $this->redirect($this->referer());
+        	}
+
+        	if(!$user->is_active) {
+        		$this->Flash->error(__('To konto nie zostało aktywowane. Prosimy o kliknięcie linka aktywacyjnego, który został wysłany na twój adres email'));
+        		return $this->redirect($this->referer());
+        	}
+
+        	$user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                $this->Flash->success(__('Zostałeś zalogowany'));
+                return $this->redirect(['controller' => 'Drugs', 'action' => 'index']);
+            }
+            $this->Flash->error(__('Hasło niepoprawne'));
+    		return $this->redirect($this->referer());
+
+        }
+
 		$__view = 'login';
 		$this->set(compact('__view'));		
 	}
@@ -98,7 +125,7 @@ class UsersController extends AppController
 		} else {
 			$this->Flash->error('Błąd serwera');
 		}
-		
+
 		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 	}
 
@@ -111,7 +138,8 @@ class UsersController extends AppController
 	}
 
 	public function logout() {
-		
+        $this->Flash->success('Zostałeś pomyślnie wylogowany.');
+        return $this->redirect(['controller' => 'Users', 'action' => 'login']);		
 	}
 
 }

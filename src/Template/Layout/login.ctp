@@ -28,21 +28,25 @@
                 </div>
 
                 <div class="lb-body">
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input type="text" class="input-sm form-control fg-input">
-                            <label class="fg-label"><?= __('Email') ?></label>
-                        </div>
-                    </div>
 
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input type="password" class="input-sm form-control fg-input">
-                            <label class="fg-label"><?= __('Hasło') ?></label>
+                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'login']) ?>">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input type="email" name="email" class="input-sm form-control fg-input">
+                                <label class="fg-label"><?= __('Email') ?></label>
+                            </div>
                         </div>
-                    </div>
 
-                    <button class="btn palette-Teal bg"><?= __('Zaloguj') ?></button>
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input type="password" name="password" class="input-sm form-control fg-input">
+                                <label class="fg-label"><?= __('Hasło') ?></label>
+                            </div>
+                        </div>
+
+                        <button class="btn palette-Teal bg"><?= __('Zaloguj') ?></button>
+                    </form>
+
 
                     <div class="m-t-20">
                         <a data-block="#l-register" data-bg="blue" class="palette-Teal text d-block m-b-5" href="#"><?= __('Załóż konto') ?></a>
