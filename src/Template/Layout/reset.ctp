@@ -21,21 +21,15 @@
     <body>
         <div class="login" data-lbg="teal">
             <!-- Login -->
-            <div class="l-block <?= $__view == 'login' ? 'toggled' : '' ?>" id="l-login">
+            <div class="l-block toggled" id="l-login">
                 <div class="lb-header palette-Teal bg">
                     <i class="zmdi zmdi-account-circle"></i>
-                    <?= __('Logowanie') ?>
+                    <?= __('Reset hasła') ?>
                 </div>
 
                 <div class="lb-body">
 
-                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'login']) ?>">
-                        <div class="form-group fg-float">
-                            <div class="fg-line">
-                                <input type="email" name="email" class="input-sm form-control fg-input">
-                                <label class="fg-label"><?= __('Email') ?></label>
-                            </div>
-                        </div>
+                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'reset', $this->request->params['pass'][0]]) ?>">
 
                         <div class="form-group fg-float">
                             <div class="fg-line">
@@ -44,78 +38,21 @@
                             </div>
                         </div>
 
-                        <button class="btn palette-Teal bg"><?= __('Zaloguj') ?></button>
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input type="password" name="passwd" class="input-sm form-control fg-input">
+                                <label class="fg-label"><?= __('Potwierdź') ?></label>
+                            </div>
+                        </div>                        
+
+                        <button class="btn palette-Teal bg"><?= __('Resetuj') ?></button>
                     </form>
 
 
                     <div class="m-t-20">
-                        <a data-block="#l-register" data-bg="blue" class="palette-Teal text d-block m-b-5" href="#"><?= __('Załóż konto') ?></a>
-                        <a data-block="#l-forget-password" data-bg="purple" href="#" class="palette-Teal text"><?= __('Przypomnij hasło') ?></a>
+                        <a data-block="#l-register" data-bg="blue" class="palette-Teal text d-block m-b-5" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'register']) ?>"><?= __('Załóż konto') ?></a>
+                        <a data-block="#l-forget-password" data-bg="purple" href="<?= $this->url->build(['controller' => 'Users' , 'action' => 'login']) ?>" class="palette-Teal text"><?= __('Zaloguj') ?></a>
                     </div>
-                </div>
-            </div>
-
-            <!-- Register -->
-            <div class="l-block <?= $__view == 'register' ? 'toggled' : '' ?>" id="l-register">
-                <div class="lb-header palette-Blue bg">
-                    <i class="zmdi zmdi-account-circle"></i>
-                    <?= __('Załóż konto') ?>
-                </div>
-
-                <div class="lb-body">
-                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'register']) ?>">
-                        <div class="form-group fg-float">
-                            <div class="fg-line">
-                                <input type="email" name="email" class="input-sm form-control fg-input">
-                                <label class="fg-label"><?= __('Email') ?></label>
-                            </div>
-                        </div>
-
-                        <div class="form-group fg-float">
-                            <div class="fg-line">
-                                <input type="password" name="password" class="input-sm form-control fg-input">
-                                <label class="fg-label"><?= __('Hasło') ?></label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn palette-Blue bg"><?= __('Załóż konto') ?></button>
-
-                        <div class="m-t-30">
-                            <a data-block="#l-login" data-bg="teal" class="palette-Blue text d-block m-b-5" href="#"><?= __('Logowanie') ?></a>
-                            <a data-block="#l-forget-password" data-bg="purple" href="#" class="palette-Blue text"><?= __('Przypomnij hasło') ?></a>
-                        </div>                        
-                    </form>
-
-                </div>
-            </div>
-
-            <!-- Forgot Password -->
-            <div class="l-block <?= $__view == 'remind' ? 'toggled' : '' ?>" id="l-forget-password">
-                <div class="lb-header palette-Purple bg">
-                    <i class="zmdi zmdi-account-circle"></i>
-                    <?= __('Przypomnij hasło') ?>
-                </div>
-
-                <div class="lb-body">
-
-                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'remind']) ?>">
-                        <p class="m-b-30"><?= __('Wpisz swój adres email, wyślemy na niego link do resetujący hasło') ?></p>
-
-                        <div class="form-group fg-float">
-                            <div class="fg-line">
-                                <input type="text" name="email" class="input-sm form-control fg-input">
-                                <label class="fg-label"><?= __('Email') ?></label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn palette-Purple bg"><?= __('Wyślij') ?></button>
-                    </form>
-
-                    <div class="m-t-30">
-                        <a data-block="#l-login" data-bg="teal" class="palette-Purple text d-block m-b-5" href="#"><?= __('Logowanie') ?></a>
-                        <a data-block="#l-register" data-bg="blue" href="#" class="palette-Purple text"><?= __('Załóż konto') ?></a>
-                    </div>
-
                 </div>
             </div>
         </div>

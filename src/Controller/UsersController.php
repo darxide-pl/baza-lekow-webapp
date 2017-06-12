@@ -102,6 +102,8 @@ class UsersController extends AppController
 
 	public function remind() {
 
+		$this->viewBuilder()->setLayout('Login');
+
 		if($this->request->is(['post'])) {
 
 			$t = $this->request->getData();
@@ -155,12 +157,52 @@ class UsersController extends AppController
 		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 	}
 
-	public function reset() {
+	public function reset($token = '') {
 		
-	}
+		$this->viewBuilder()->setLayout('reset');
 
-	public function activate() {
-		
+		if(!$token) {
+			$this->Flash->error(__('Brak tokena'));
+			return $this->redirect($this->referer());
+		}
+
+		$user = $this->Users->findByResetHash($token)->first();
+
+		if(is_null($user)) {
+			$this->Flash->error(__('Nieprawidłowy token'));
+			return $this->redirect($this->referer());
+		}
+
+		if($this->request->is(['post'])) {
+
+			$t = $this->request->getData();
+			if(!$t['password']) {
+				$this->Flash->error(__('Proszę wprowadzić hasło'));
+				return $this->redirect($this->referer());
+			}
+
+			if(!$t['passwd']) {
+				$this->Flash->error(__('Proszę potwierdzić hasło'));
+				return $this->redirect($this->referer());
+			}
+
+			if($t['passwd'] != $t['password']) {
+				$this->Flash->error(__('Podane hasła nie są takie same'));
+				return $this->redirect($this->referer());				
+			}
+
+			$user->password = $t['password'];
+
+			if($this->Users->save($user)) {
+				$this->Flash->success(__('Hasło zostało zmienione. Możesz się teraz zalogować'));
+				return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+			}
+
+			$this->Flash->error(__('Błąd serwera'));
+			return $this->redirect($this->referer());	
+
+		}
+
 	}
 
 	public function logout() {
