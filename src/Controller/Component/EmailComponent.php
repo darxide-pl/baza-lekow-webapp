@@ -65,19 +65,20 @@ class EmailComponent extends Component
 
 		try {
 			
-			$this->setServer();	
+			$this->server();	
 
 	        $email = new Email();
-	        $email->transport('filemon');
+	        $email->transport('baza-lekow');
 	        $email->setViewVars(['user' => $user]);
 
 			$email
 				->setTemplate('reset')
-				->setLayout($this->Config->main_theme)
+				->setLayout('default')
 				->setEmailFormat('html')
 				->setTo($user->email)
+				->setSubject(__('Resetowanie hasła'))
 				->setFrom([
-	            		$this->server['smtp_sendermail'] => $this->server['smtp_sendername']
+	            		'admin@baza-lekow.dariuszm.pl' => 'Administrator Baza Leków'
 	            	]);
 
 	        $email->send();	        

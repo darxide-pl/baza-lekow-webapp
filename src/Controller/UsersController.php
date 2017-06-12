@@ -101,6 +101,32 @@ class UsersController extends AppController
 	}
 
 	public function remind() {
+
+		if($this->request->is(['post'])) {
+
+			$t = $this->request->getData();
+			$user = $this->Users->findByEmail($t['email'])->first();
+
+			if(is_null($user)) {
+				$this->Flash->error(__('Użytkownik nie istnieje'));
+	    		return $this->redirect($this->referer());			
+			}
+
+			$user->reset_hash = sha1(md5(microtime(TRUE)));
+
+			if(!$this->Users->save($user)) {
+				$this->Flash->error(__('Błąd serwera'));
+	    		return $this->redirect($this->referer());			
+			}
+
+			$this->loadComponent('Email');
+			$this->Email->userResetPassword($user);
+
+			$this->Flash->success(__('Na podany adres email został wysłany link do formularza resetującego hasło'));
+    		return $this->redirect($this->referer());			
+
+		}
+
 		$__view = 'remind';
 		$this->set(compact('__view'));		
 	}

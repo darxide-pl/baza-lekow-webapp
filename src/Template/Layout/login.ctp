@@ -97,21 +97,25 @@
                 </div>
 
                 <div class="lb-body">
-                    <p class="m-b-30"><?= __('Wpisz swój adres email, wyślemy na niego link do resetujący hasło') ?></p>
 
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input type="text" class="input-sm form-control fg-input">
-                            <label class="fg-label"><?= __('Email') ?></label>
+                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'remind']) ?>">
+                        <p class="m-b-30"><?= __('Wpisz swój adres email, wyślemy na niego link do resetujący hasło') ?></p>
+
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input type="text" name="email" class="input-sm form-control fg-input">
+                                <label class="fg-label"><?= __('Email') ?></label>
+                            </div>
                         </div>
-                    </div>
 
-                    <button class="btn palette-Purple bg">Create Account</button>
+                        <button type="submit" class="btn palette-Purple bg"><?= __('Wyślij') ?></button>
+                    </form>
 
                     <div class="m-t-30">
                         <a data-block="#l-login" data-bg="teal" class="palette-Purple text d-block m-b-5" href="#"><?= __('Logowanie') ?></a>
                         <a data-block="#l-register" data-bg="blue" href="#" class="palette-Purple text"><?= __('Załóż konto') ?></a>
                     </div>
+
                 </div>
             </div>
         </div>
