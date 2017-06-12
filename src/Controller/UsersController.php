@@ -51,11 +51,15 @@ class UsersController extends AppController
 
 
 			if($this->Users->save($user)) {
+
+				$this->loadComponent('Email');
+				$this->Email->userRegister($user);
+
 				$this->Flash->success(__('Zostałeś zarejestrowany. Na twój adres email został wysłany link aktywacyjny.'));
 			} else {
 				$this->Flash->error(__('Błąd zapisu do bazy'));
 			}
-			
+
 			return $this->redirect($this->referer());
 		}
 

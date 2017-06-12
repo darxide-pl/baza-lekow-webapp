@@ -13,12 +13,42 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html>
 <head>
-    <title><?= $this->fetch('title') ?></title>
+	<title></title>
+<style type="text/css">
+body {
+	background-color: #edecec;
+	font-size: 16px;
+	font-family: 'Calibri', 'Helvetica Nueue','Verdana','sans-serif';
+	color: #5e5e5e;
+	margin:0;
+	padding: 0;
+}
+* {
+	box-sizing: border-box;
+}
+.content {
+	width: 500px;
+	margin:30px auto;
+}
+
+.item {
+	background-color: #fff;
+	padding: 18px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+a {
+	color: #2196f3;
+	text-decoration: none !important;
+}
+</style>
 </head>
 <body>
-    <?= $this->fetch('content') ?>
+	<div class="content">
+		<?= $this->fetch('content') ?>
+	</div>
 </body>
 </html>
