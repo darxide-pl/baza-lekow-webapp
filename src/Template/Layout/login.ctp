@@ -15,7 +15,7 @@
             
         <!-- CSS -->
         <link href="/css/app.min.1.css" rel="stylesheet">
-        <link href="/oogicss/app.min.2.css" rel="stylesheet">
+        <link href="/css/app.min.2.css" rel="stylesheet">
     </head>
     
     <body>
@@ -59,27 +59,29 @@
                 </div>
 
                 <div class="lb-body">
-
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input type="text" class="input-sm form-control fg-input">
-                            <label class="fg-label"><?= __('Email') ?></label>
+                    <form method="post" action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'register']) ?>">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input type="email" name="email" class="input-sm form-control fg-input">
+                                <label class="fg-label"><?= __('Email') ?></label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input type="password" class="input-sm form-control fg-input">
-                            <label class="fg-label"><?= __('Hasło') ?></label>
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input type="password" name="password" class="input-sm form-control fg-input">
+                                <label class="fg-label"><?= __('Hasło') ?></label>
+                            </div>
                         </div>
-                    </div>
 
-                    <button class="btn palette-Blue bg"><?= __('Załóż konto') ?></button>
+                        <button type="submit" class="btn palette-Blue bg"><?= __('Załóż konto') ?></button>
 
-                    <div class="m-t-30">
-                        <a data-block="#l-login" data-bg="teal" class="palette-Blue text d-block m-b-5" href="#"><?= __('Logowanie') ?></a>
-                        <a data-block="#l-forget-password" data-bg="purple" href="#" class="palette-Blue text"><?= __('Przypomnij hasło') ?></a>
-                    </div>
+                        <div class="m-t-30">
+                            <a data-block="#l-login" data-bg="teal" class="palette-Blue text d-block m-b-5" href="#"><?= __('Logowanie') ?></a>
+                            <a data-block="#l-forget-password" data-bg="purple" href="#" class="palette-Blue text"><?= __('Przypomnij hasło') ?></a>
+                        </div>                        
+                    </form>
+
                 </div>
             </div>
 
@@ -157,6 +159,7 @@
         <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/vendors/bower_components/Waves/dist/waves.min.js"></script>
+        <script src="/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>        
 
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
@@ -164,6 +167,7 @@
         <![endif]-->
 
         <script src="/js/functions.js"></script>
+        <?= $this->Flash->render() ?>
         
     </body>
 </html>

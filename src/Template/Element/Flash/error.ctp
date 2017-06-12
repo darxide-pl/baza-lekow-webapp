@@ -3,4 +3,15 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-<div class="message error" onclick="this.classList.add('hidden');"><?= $message ?></div>
+<script type="text/javascript">
+$.growl({
+	message:"<?= h($message) ?>"
+},{
+	type:'danger',
+	allow_dismiss: true,
+	'placement':{
+		from:'bottom',
+		align:'left'
+	}
+})	
+</script>
