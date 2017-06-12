@@ -78,8 +78,28 @@ class UsersController extends AppController
 		$this->set(compact('__view'));		
 	}
 
-	public function confirm() {
+	public function confirm($token = '') {
+
+		if(!$token) {
+			$this->Flash->error(__('Brak tokena'));
+			return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+		}
+
+		$user = $this->Users->findByActivator($token)->first();
+
+		if(is_null($user)) {
+			$this->Flash->error(__('Nieprawidłowy token'));
+			return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+		}
+
+		$user->is_active = 1;
+		if($this->Users->save($user)) {
+			$this->Flash->success(__('Twoje konto zostało aktywowane. Teraz możesz się zalogować'));
+		} else {
+			$this->Flash->error('Błąd serwera');
+		}
 		
+		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 	}
 
 	public function reset() {
