@@ -351,8 +351,6 @@ class DrugsController extends AppController
 				])
 			->first();
 
-		dump($drug);
-
 		if(is_null($drug)) {
 			$this->Flash->error(__('Nie znaleziono leku'));
 			return $this->redirect($this->referer());

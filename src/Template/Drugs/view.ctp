@@ -144,6 +144,26 @@
 	                		</dd>
 	                	</dl>
 	                <?php endif; ?>
+	                <?php if($drug->has('tags')): ?>
+	                	<dl class="dl-horizontal">
+	                		<dt><?= __('Tagi') ?></dt>
+	                		<dd>
+	                			<?= implode(' ', array_map(function($item) {
+	                					return $this->Html->link($item->name , [
+	                							'controller' => 'Drugs', 
+	                							'action' => 'index', 
+	                							'?' => [
+	                								'filter' => [
+	                									'tag' => $item->id
+	                								]
+	                							]
+	                						], [
+	                							'class' => 'label label-primary'
+	                						]);
+	                				}, $drug->tags)) ?>
+	                		</dd>
+	                	</dl>
+	                <?php endif; ?>
                 </div>
             </div>
         </div>
