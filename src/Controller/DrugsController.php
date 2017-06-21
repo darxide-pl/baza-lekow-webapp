@@ -36,8 +36,7 @@ class DrugsController extends AppController
 				]
 			];
 		}
-
-
+		
 		/**
 		 *	FILTROWANIE WG SUBSTANCJI
 		 * */
@@ -62,7 +61,6 @@ class DrugsController extends AppController
 					];
 				}				
 			}
-
 			/**
 			 *	ZAWIERA KTÓRĄKOLWIEK Z ZAZNACZONYCH SUBSTANCJI
 			 * */
@@ -335,6 +333,29 @@ class DrugsController extends AppController
 			]);
 
 		$this->set(compact('drugs', 'substances', 'specializations', 'forms', 'treatments'));
+
+	}
+
+	public function view($id = NULL) {
+		
+		$drug = $this
+			->Drugs
+			->findById($id)
+			->contain([
+					'Substances', 
+					'Categories',
+					'Forms', 
+					'Specializations', 
+					'Treatments'
+				])
+			->first();
+
+		if(is_null($drug)) {
+			$this->Flash->error(__('Nie znaleziono leku'));
+			return $this->redirect($this->referer());
+		}
+
+		$this->set(compact('drug'));
 
 	}
 

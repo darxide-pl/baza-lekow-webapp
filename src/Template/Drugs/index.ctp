@@ -136,7 +136,9 @@
 
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
-                                    <a href="#"><?= __('Szczegóły') ?></a>
+                                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->id]) ?>">
+                                        <?= __('Szczegóły') ?>    
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="#"><?= __('Komentarze') ?></a>

@@ -14140,16 +14140,17 @@ html.ismobile .page-loader {
 -----------------------------------------*/
 
 .action-header {
-  padding: 34px 30px 35px;
-  line-height: 100%;
-  font-weight: 500;
-  color: #4C4C4C;
-  margin-bottom: 10px;
-  font-size: 15px;
-  position: relative;
-  z-index: 1;
-  background-color: #f7f7f7;
-  min-height: 65px;
+    padding: 24px 30px 35px;
+    line-height: 100%;
+    font-weight: 500;
+    color: #4C4C4C;
+    margin-bottom: 10px;
+    font-size: 15px;
+    position: relative;
+    z-index: 1;
+    background-color: #f7f7f7;
+    min-height: 65px;
+    height: 69px;
 }
 
 .action-header .actions {

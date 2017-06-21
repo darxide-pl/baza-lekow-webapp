@@ -12,10 +12,6 @@ class FilterHelper extends Helper
     }
 
     public static function link($filter,$value) {
-
-        if(isset($_GET[$filter])) {
-            unset($_GET[$filter]);
-        }
         
         $query = http_build_query(array_merge($_GET,['filter['.$filter.']' => $value])).'&page=1';
         $query = urlencode($query);
