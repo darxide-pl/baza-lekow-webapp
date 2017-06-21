@@ -381,4 +381,47 @@ class DrugsController extends AppController
 
 	}
 
+	public function comment($id = NULL) {
+
+		if($this->request->is(['post', 'patch', 'put'])) {
+			
+			$drug = $this->Drugs->findById($id)->first();
+
+			if(is_null($drug)) {
+				$this->Flash->error(__('Nie znaleziono leku'));
+				return $this->redirect($this->referer());
+			}
+
+			$t = $this->request->getData();
+			$this->loadModel('Comments');
+
+			if(!strlen(trim($t['comment']))) {
+				$this->Flash->error(__('Proszę podać komentarz'));
+				return $this->redirect($this->referer());
+			}
+
+			if(!strlen(trim($t['name']))) {
+				$this->Flash->error(__('Proszę podać imię/nick'));
+				return $this->redirect($this->referer());
+			}
+
+			$comment = $this->Comments->newEntity();
+			$comment->add_date = date('Y-m-d H:i:s');
+			$comment->user_id = $this->Auth->user()['id'] ?? 0;
+			$comment->comment = $t['comment'];
+			$comment->name = $t['name'];
+			$comment->drug_id = $drug->id;
+
+			if(!$this->Comments->save($comment)) {
+				$this->Flash->error(__('Nie udało się zapisać komentarza'));
+			} else {
+				$this->Flash->success(__('komentarz zapisano'));
+			}
+
+			return $this->redirect($this->referer());
+		}
+
+		return $this->redirect($this->referer());
+	}
+
 }

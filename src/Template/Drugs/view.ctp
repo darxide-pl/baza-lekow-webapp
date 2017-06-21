@@ -171,6 +171,10 @@
         	<div id="comments" class="tab-pane fade">
         		<div class="pmb-block">
 		            <div class="pmbb-header">
+		                <a href="#" data-toggle="modal" data-target="#comment" class="pull-right btn btn-sm btn-default">
+		                	<i class="fa fa-fw fa-plus"></i>
+		                	<?= __('Dodaj Komentarz') ?>
+		                </a>
 		                <h2><i class="zmdi zmdi-comment-alert m-r-5"></i> <?= __('Komentarze') ?></h2>
 		            </div>
 		            <div class="pmbb-body p-l-30">
@@ -193,4 +197,45 @@
         </div>
 
     </div>
+</div>
+
+<div id="comment" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<?= $this->Form->create(NULL, [
+				'url' => [
+					'controller' => 'Drugs', 
+					'action' => 'comment', 
+					$drug->id
+				],
+				'class' => 'form-horizontal'
+			]) ?>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title"><?= __('Dodaj Komentarz') ?></h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<?= $this->Form->input('name' , [
+							'label' => __('Imię'), 
+							'value' => $this->request->session()->read('Auth.User.name'), 
+							'class' => 'form-control', 
+							'required' => true
+						]) ?>
+						<?= $this->Form->input('comment' , [
+							'type' => 'textarea', 
+							'label' => 'Komentarz', 
+							'class' => 'form-control', 
+							'required' => true
+						]) ?>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><?= __('Zamknij') ?></button>
+					<button type="submit" class="btn btn-default"><?= __('Zapisz') ?></button>
+				</div>
+			<?= $this->Form->end() ?>
+		</div>
+
+	</div>
 </div>
