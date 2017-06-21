@@ -9,6 +9,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <?= $this->Filter->input('search') ?>
+                        <?= $this->Filter->input('tag') ?>
                         <label><?= __('Substancje') ?></label>
                         <select name="filter[substances][]" class="__substances" multiple="">
                             <?php if(count($substances)):foreach($substances as $k => $v): ?>

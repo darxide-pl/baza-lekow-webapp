@@ -63,6 +63,7 @@
             <?= $this->Filter->input('forms_mode') ?>            
             <?= $this->Filter->input('treatments') ?>
             <?= $this->Filter->input('treatments_mode') ?>
+            <?= $this->Filter->input('tag') ?>
             <i class="zmdi zmdi-search hs-reset" data-ma-action="search-clear"></i>
         </form>
     </div>

@@ -9,7 +9,8 @@
                     $this->Filter->get('substances') || 
                     $this->Filter->get('specializations') || 
                     $this->Filter->get('forms') || 
-                    $this->Filter->get('treatments')): ?>
+                    $this->Filter->get('treatments') || 
+                    $this->Filter->get('tag')): ?>
                 <?= __('Aktywne filtry:') ?>
 
                 <?php if($this->Filter->get('category')): ?>
@@ -47,6 +48,13 @@
                     </a>
                 <?php endif; ?>                   
 
+                <?php if($this->Filter->get('tag')): ?>
+                    <a class="btn btn-default btn-xs" href="<?= $this->Filter->link('tag','') ?>">
+                        <?= __('tagi') ?>
+                        <i class="zmdi zmdi-close"></i>
+                    </a>
+                <?php endif; ?>                              
+
             <?php endif; ?>
         </div>
 
@@ -63,6 +71,7 @@
                 <?= $this->Filter->input('forms_mode') ?>
                 <?= $this->Filter->input('treatments') ?>
                 <?= $this->Filter->input('treatments_mode') ?>                
+                <?= $this->Filter->input('tag') ?>
 
                 <i class="ah-search-close zmdi zmdi-long-arrow-left" data-ma-action="ah-search-close"></i>
                 <button type="submit" class="hidden"></button>

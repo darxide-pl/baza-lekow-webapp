@@ -323,6 +323,18 @@ class DrugsController extends AppController
 			$config['group'] = ['Drugs.id'];
 		}
 
+		if($this->Filter->get('tag')) {
+
+			$config['join'][] = [
+				'table' => 'drug_tag',
+				'alias' => 'tag', 
+				'conditions' => [
+					'tag.drug_id = Drugs.id AND tag.tag_id = '.(int)$this->Filter->get('tag')
+				]
+			];
+
+		}
+
 		$drugs = $this->paginate('Drugs', [
 				'contain' => [
 					'Categories'
