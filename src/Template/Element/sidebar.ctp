@@ -45,6 +45,14 @@
             <a href="<?= $this->Url->build(['controller' => 'Treatments', 'action' => 'index']) ?>">
                 <i class="fa fa-fw fa-heartbeat"></i> <?= __('Działania leków') ?>
             </a>
-        </li>        
+        </li>   
+        <?php if($this->User->isAdmin()): ?>     
+            <li>
+                <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'index']) ?>">
+                    <i class="fa fa-fw fa-users"></i>
+                    <?= __('Użytkownicy') ?>
+                </a>
+            </li>
+        <?php endif; ?>
     </ul>
 </aside>

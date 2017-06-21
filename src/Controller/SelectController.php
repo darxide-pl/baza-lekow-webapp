@@ -8,6 +8,10 @@ use Cake\Event\Event;
 class SelectController extends AppController
 {
 
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow();
+    }    
+
 	public function substances() {
 
         $config = [];
