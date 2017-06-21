@@ -368,7 +368,15 @@ class DrugsController extends AppController
 			return $this->redirect($this->referer());
 		}
 
-		$this->set(compact('drug'));
+		$info = TableRegistry::get('drug_description')
+			->find('all' , [
+					'conditions' => [
+						'drug_id' => $id
+					]
+				])
+			->toArray();
+
+		$this->set(compact('drug', 'info'));
 
 	}
 

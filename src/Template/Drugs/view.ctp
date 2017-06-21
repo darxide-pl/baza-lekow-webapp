@@ -33,20 +33,6 @@
         <div class="pmb-block">
             <div class="pmbb-header">
                 <h2><i class="zmdi zmdi-account m-r-5"></i> <?= __('Podstawowe informacje') ?></h2>
-
-                <ul class="actions">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown">
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a data-pmb-action="edit" href="#">Edit</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="pmbb-body p-l-30">
                 <div class="pmbb-view">
@@ -168,15 +154,18 @@
             </div>
         </div>
 
-        <div class="pmb-block">
-            <div class="pmbb-header">
-                <h2><i class="zmdi zmdi-equalizer m-r-5"></i> Summary</h2>
-            </div>
-            <div class="pmbb-body p-l-30">
-                <div class="pmbb-view">
-                    Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.
-                </div>
-            </div>
-        </div>
+        <?php if(count($info)):foreach($info as $v): ?>
+	        <div class="pmb-block">
+	            <div class="pmbb-header">
+	                <h2><i class="zmdi zmdi-equalizer m-r-5"></i> <?= $v->title ?></h2>
+	            </div>
+	            <div class="pmbb-body p-l-30">
+	                <div class="pmbb-view">
+		                <?= h($v->content) ?>
+	                </div>
+	            </div>
+	        </div>
+        <?php endforeach;endif; ?>
+
     </div>
 </div>
