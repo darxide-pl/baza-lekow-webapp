@@ -74,6 +74,12 @@ class DrugsTable extends Table
                 'joinTable' => 'drug_treatment'
             ]);        
 
+        $this->belongsToMany('Tags' , [
+                'foreignKey' => 'drug_id', 
+                'targetForeignKey' => 'tag_id', 
+                'joinTable' => 'drug_tag'
+            ]);
+
 /*        $this->hasMany('DrugCategory', [
             'foreignKey' => 'drug_id'
         ]);

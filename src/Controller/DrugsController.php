@@ -14,7 +14,7 @@ class DrugsController extends AppController
 	}
 
 	public function index() {
-		
+
 		$config = [];
 		$config['join'] = [];
 		$config['conditions'] = [];
@@ -36,7 +36,7 @@ class DrugsController extends AppController
 				]
 			];
 		}
-		
+
 		/**
 		 *	FILTROWANIE WG SUBSTANCJI
 		 * */
@@ -346,9 +346,12 @@ class DrugsController extends AppController
 					'Categories',
 					'Forms', 
 					'Specializations', 
-					'Treatments'
+					'Treatments', 
+					'Tags'
 				])
 			->first();
+
+		dump($drug);
 
 		if(is_null($drug)) {
 			$this->Flash->error(__('Nie znaleziono leku'));
