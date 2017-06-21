@@ -359,7 +359,8 @@ class DrugsController extends AppController
 					'Forms', 
 					'Specializations', 
 					'Treatments', 
-					'Tags'
+					'Tags', 
+					'Comments'
 				])
 			->first();
 

@@ -80,34 +80,9 @@ class DrugsTable extends Table
                 'joinTable' => 'drug_tag'
             ]);
 
-/*        $this->hasMany('DrugCategory', [
-            'foreignKey' => 'drug_id'
-        ]);
-        $this->hasMany('DrugDescription', [
-            'foreignKey' => 'drug_id'
-        ]);
-        $this->hasMany('DrugForm', [
-            'foreignKey' => 'drug_id'
-        ]);
-        $this->hasMany('DrugSpecialization', [
-            'foreignKey' => 'drug_id'
-        ]);
-        $this->hasMany('DrugSubstance', [
-            'foreignKey' => 'drug_id'
-        ]);
-        $this->hasMany('DrugTreatment', [
-            'foreignKey' => 'drug_id'
-        ]);
-        $this->belongsToMany('Comment', [
-            'foreignKey' => 'drug_id',
-            'targetForeignKey' => 'comment_id',
-            'joinTable' => 'drug_comment'
-        ]);
-        $this->belongsToMany('Tag', [
-            'foreignKey' => 'drug_id',
-            'targetForeignKey' => 'tag_id',
-            'joinTable' => 'drug_tag'
-        ]);*/
+        $this->hasMany('Comments' , [
+                'foreignKey' => 'drug_id'
+            ]);
     }
 
     /**
