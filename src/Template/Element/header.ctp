@@ -49,6 +49,13 @@
                 <?php endif; ?>
             </ul>
         </li>
+        <?php if(!$this->User->isLoged()): ?>
+            <li>
+                <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'login']) ?>">
+                    <i class="hm-icon zmdi zmdi-account"></i>
+                </a>
+            </li>
+        <?php endif; ?>
     </ul>
 
     <div class="media-body h-search">

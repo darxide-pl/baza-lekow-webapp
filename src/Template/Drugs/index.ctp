@@ -152,11 +152,19 @@
                                 <li>
                                     <a href="#"><?= __('Komentarze') ?></a>
                                 </li>
-                                <li>
-                                    <a href="#" class="btn-action" data-controller="drugs" data-action="index">
-                                        <?= __('Powiadom o aktualizacji') ?>    
-                                    </a>
-                                </li>
+                                <?php if(!isset($v->follow['user_id'])): ?>
+                                    <li>
+                                        <a href="javascript:void(0)" class="btn-action" data-controller="drugs" data-action="follow" data-id="<?= $v->id ?>">
+                                            <?= __('Powiadom o aktualizacji') ?>    
+                                        </a>
+                                    </li>
+                                <?php else: ?>
+                                    <li>
+                                        <a href="javascript:void(0)" class="btn-action" data-controller="drugs" data-action="unfollow" data-id="<?= $v->id ?>">
+                                            <?= __('Nie powiadamiaj o aktualizacji') ?>    
+                                        </a>
+                                    </li>                                    
+                                <?php endif; ?>
                             </ul>
                         </li>
                     </ul>

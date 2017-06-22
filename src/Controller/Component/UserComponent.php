@@ -7,14 +7,42 @@ use Cake\ORM\TableRegistry;
 class UserComponent extends Component
 {
 
-	public $components = ['Auth'];
+	private function session() {
+
+		if(!isset($this->Auth)) {
+			$this->Auth = $this->request->session()->read('Auth.User');		
+		}
+
+		return $this->Auth;
+	}
+
 
 	public function isLoged() {
-		return !!$this->Auth->user()['id'];
+
+		$this->session();
+
+		if(!isset($this->Auth)) {
+			return FALSE;
+		}
+
+		return !!$this->Auth['id'];
 	}
 
 	public function isAdmin() {
-		return !!$this->Auth->user()['roles_id'] === 1;
+
+		$this->session();
+
+		if(!isset($this->Auth)) {
+			return FALSE;
+		}
+
+		return !!$this->Auth['roles_id'] === 1;
+	}
+
+	public function __get($name) {
+
+		$this->session();
+		return $this->Auth[$name] ?? NULL;
 	}
 
 }

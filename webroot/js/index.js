@@ -128,6 +128,38 @@ const actions = {
 
     },
 
+    drugs : {
+
+        follow : function(e) {
+            let item = $(e.currentTarget)
+            $.post('/drugs/follow' , {
+                id : item.data('id')
+            }).done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    item
+                        .data('action' , 'unfollow')
+                        .text('Nie powiadamiaj o aktualizacji')
+                }
+            })
+        }, 
+
+        unfollow : function(e) {
+            let item = $(e.currentTarget)
+            $.post('/drugs/unfollow' , {
+                id : item.data('id')
+            }).done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    item
+                        .data('action', 'follow')
+                        .text('Powiadom o aktualizacji')
+                }
+            })
+        }
+
+    },
+
     helper : {
         /**
          *  create and submit bulk form

@@ -335,7 +335,28 @@ class DrugsController extends AppController
 
 		}
 
+		$this->loadComponent('User');
+		$config['fields'] = [];
+
+		if($this->User->isLoged()) {
+			$config['join'][] = [
+				'table' => 'drug_follow', 
+				'alias' => 'follow',
+				'type' => 'left', 
+				'conditions' => [
+					'follow.drug_id = Drugs.id AND follow.user_id = '.
+					(int)$this->User->id
+				]
+			];
+
+			$config['fields'] = array_merge(
+					$this->Drugs->schema()->columns(), 
+					['follow.user_id']
+				);
+		}
+
 		$drugs = $this->paginate('Drugs', [
+				'fields' => $config['fields'],
 				'contain' => [
 					'Categories'
 				], 
@@ -422,6 +443,46 @@ class DrugsController extends AppController
 		}
 
 		return $this->redirect($this->referer());
+	}
+
+	public function follow() {
+		
+		$t = $this->request->getData();
+		$this->loadComponent('User');
+
+		if(!$this->User->isLoged()) {
+			$this->error(__('Opcja tylko dla zarejestrowanych użytkowników'));
+		}
+
+		$this->loadModel('Follows');
+		$e = $this->Follows->newEntity();
+		$e->user_id = $this->User->id;
+		$e->drug_id = $t['id'];
+
+		if($this->Follows->save($e)) {
+			$this->success(__('Będziesz powiadamiany o aktualizacjach tego leku'));
+		}
+
+		$this->error(__('Błąd serwera'));
+
+	}
+
+	public function unfollow() {
+		
+		$t = $this->request->getData();
+		$this->loadComponent('User');
+
+		if(!$this->User->isLoged()) {
+			$this->error(__('Opcja tylko dla zarejestrowanych użytkowników'));
+		}
+
+		$this->loadModel('Follows');
+		$this->Follows->deleteAll([
+			'user_id' => $this->User->id,
+			'drug_id' => $t['id']
+		]);
+
+		$this->success(__('Cofnięto powiadamianie o tym leku'));
 	}
 
 }
