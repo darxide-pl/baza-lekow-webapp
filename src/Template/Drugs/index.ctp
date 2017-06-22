@@ -153,7 +153,9 @@
                                     <a href="#"><?= __('Komentarze') ?></a>
                                 </li>
                                 <li>
-                                    <a href="#"><?= __('Powiadom o aktualizacji') ?></a>
+                                    <a href="#" class="btn-action" data-controller="drugs" data-action="index">
+                                        <?= __('Powiadom o aktualizacji') ?>    
+                                    </a>
                                 </li>
                             </ul>
                         </li>
