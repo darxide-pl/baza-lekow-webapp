@@ -150,10 +150,26 @@ const actions = {
                 id : item.data('id')
             }).done(function(data) {
                 let response = JSON.parse(data)
-                if(typeof response.error == 'undefined') {
+                if(typeof response.errosr == 'undefined') {
                     item
                         .data('action', 'follow')
                         .text('Powiadom o aktualizacji')
+                }
+            })
+        }, 
+
+        removeFollow : function(e) {
+            let item = $(e.currentTarget)
+            $.post('/drugs/remove-follow' , {
+                id : item.data('id')
+            }).done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.success != 'undefined') {
+                    item
+                        .closest('.list-group-item')
+                        .fadeOut(240 , function() {
+                            $(this).remove()
+                        })
                 }
             })
         }

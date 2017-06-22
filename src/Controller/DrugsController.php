@@ -485,4 +485,19 @@ class DrugsController extends AppController
 		$this->success(__('Cofnięto powiadamianie o tym leku'));
 	}
 
+	public function removeFollow() {
+		
+		$t = $this->request->getData();
+		$this->loadModel('Follows');
+		$this->loadComponent('User');
+
+		$this->Follows->deleteAll([
+			'user_id' => $this->User->id, 
+			'drug_id' => $t['id']
+		]);
+
+		$this->success(__('Subskrypcja została cofnięta'));
+
+	}
+
 }

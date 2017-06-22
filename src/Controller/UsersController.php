@@ -210,4 +210,25 @@ class UsersController extends AppController
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);		
 	}
 
+	public function followed() {
+		
+		$this->loadComponent('User');
+
+		if(!$this->User->isLoged()) {
+			$this->Flash->error(__('Dostęp tylko dla zalogowanych'));
+		}
+
+		$this->loadModel('Follows');
+		$follows = $this->Follows->find('all' , [
+				'conditions' => [
+					'user_id' => $this->User->id
+				],
+				'contain' => ['Drugs']
+			])
+		->toArray();
+
+		$this->set(compact('follows'));
+
+	}
+
 }

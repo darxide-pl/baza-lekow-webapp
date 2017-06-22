@@ -28,6 +28,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link href="/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
     <link href="/vendors/bower_components/google-material-color/dist/palette.css" rel="stylesheet">
+    <link href="/vendors/bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/vendors/fa/css/font-awesome.min.css" />
         
     <!-- CSS -->
@@ -56,6 +57,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <script src="/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/vendors/bower_components/Waves/dist/waves.min.js"></script>
     <script src="/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+    <script src="/vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>    
 
     <!-- Placeholder for IE9 -->
     <!--[if IE 9 ]>
