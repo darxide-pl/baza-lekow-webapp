@@ -48,8 +48,7 @@ class UsersController extends AppController
 			$user->is_active = 0;
 			$user->activator = sha1(md5(microtime(TRUE)));
 			$user->roles_id = 2;
-
-
+			
 			if($this->Users->save($user)) {
 
 				$this->loadComponent('Email');
@@ -68,7 +67,7 @@ class UsersController extends AppController
 	}
 
 	public function login() {
-		$this->viewBuilder()->setLayout('Login');
+		$this->viewBuilder()->setLayout('login');
 
         if ($this->request->is('post')) {
 

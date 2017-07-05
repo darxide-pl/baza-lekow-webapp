@@ -46,7 +46,7 @@ class EmailComponent extends Component
 				->setTo($user->email)
 				->setSubject(__('Potwierdzenie rejestracji w serwisie baza-lekow.dariuszm.pl'))
 				->setFrom([
-	            		'admin@baza-lekow.dariuszm.pl' => 'Administrator Baza Leków'
+	            		'admin@dariuszm.pl' => 'Administrator Baza Leków'
 	            	]);
 
 	        $email->send();
@@ -78,7 +78,7 @@ class EmailComponent extends Component
 				->setTo($user->email)
 				->setSubject(__('Resetowanie hasła'))
 				->setFrom([
-	            		'admin@baza-lekow.dariuszm.pl' => 'Administrator Baza Leków'
+	            		'admin@dariuszm.pl' => 'Administrator Baza Leków'
 	            	]);
 
 	        $email->send();	        

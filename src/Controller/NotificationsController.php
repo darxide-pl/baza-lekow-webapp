@@ -67,11 +67,7 @@ class NotificationsController extends AppController
 				'type' => 1
 			]);
 
-		if($result) {
-			$this->data($result);
-		}
-
-		$this->error(__('Błąd serwera'));
+		$this->data($result);
 
 	}
 
@@ -84,11 +80,7 @@ class NotificationsController extends AppController
 				'type' => 2
 			]);
 
-		if($result) {
-			$this->data($result);
-		}
-
-		$this->error(__('Błąd serwera'));
+		$this->data($result);
 
 	}	
 
@@ -118,10 +110,6 @@ class NotificationsController extends AppController
 		$result = $this->Notifications->deleteAll([
 				'user_id' => $this->Auth->user()['id']
 			]);
-
-		if(!$result) {
-			$this->error(__('Błąd serwera'));
-		}
 
 		$this->data(['ok' => 1]);
 

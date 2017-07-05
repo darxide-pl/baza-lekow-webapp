@@ -151,9 +151,6 @@
                                         <?= __('Szczegóły') ?>    
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#"><?= __('Komentarze') ?></a>
-                                </li>
                                 <?php if(!isset($v->follow['user_id'])): ?>
                                     <li>
                                         <a href="javascript:void(0)" class="btn-action" data-controller="drugs" data-action="follow" data-id="<?= $v->id ?>">
