@@ -54,4 +54,21 @@ class NotificationsController extends AppController
 
 	}
 
+	public function readAllDrugs() {
+		
+		$result = $this->Notifications->updateAll([
+				'is_read' => 1
+			], [
+				'user_id' => $this->Auth->user()['id'], 
+				'type' => 2
+			]);
+
+		if($result) {
+			$this->data($result);
+		}
+
+		$this->error(__('Błąd serwera'));
+
+	}	
+
 }

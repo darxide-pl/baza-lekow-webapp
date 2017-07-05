@@ -13,7 +13,7 @@ class DrugsController extends AppController
 		$this->Auth->allow();
 	}
 
-	public function index() {
+	public function index() {	
 
 		$config = [];
 		$config['join'] = [];
@@ -370,7 +370,7 @@ class DrugsController extends AppController
 	}
 
 	public function view($id = NULL) {
-		
+
 		$drug = $this
 			->Drugs
 			->findById($id)

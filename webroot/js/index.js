@@ -242,6 +242,20 @@ const actions = {
             })            
         }, 
 
+        readAll : function(e) {
+            $.post('/notifications/read-all-drugs')
+            .done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    $('.notify-drug')
+                        .fadeOut(240, function() {
+                            $(this).remove()
+                        })
+                    actions.news.bell()
+                }
+            })
+        },
+
         bell : function() {
              setTimeout(function() {
                 if(!$('.notify-drug').length) {
