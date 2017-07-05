@@ -33,7 +33,9 @@
 		    				</a>
 		    			</li>
 		    			<li>
-		    				<a href="javascript:void(0)"><?= __('Usuń wszystkie') ?></a>
+		    				<a href="javascript:void(0)" class="btn-action" data-controller="notifications" data-action="deleteAll">
+		    					<?= __('Usuń wszystkie') ?>	
+		    				</a>
 		    			</li>
                     </ul>
 		        </a>

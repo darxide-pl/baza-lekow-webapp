@@ -284,6 +284,24 @@ const actions = {
                     actions.news.bell()
                 }
             })
+        }, 
+
+        deleteAll : function() {
+            $.post('/notifications/delete-all')
+            .done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    $('.category-item')
+                        .closest('.col-md-4')
+                        .fadeOut(240 , function() {
+                            $(this).remove()
+                        })
+                    $('.notify-comment').remove()
+                    $('.notify-drug').remove()
+                    actions.comments.bell()
+                    actions.news.bell()                    
+                }
+            })
         }
 
     },

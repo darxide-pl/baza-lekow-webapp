@@ -113,4 +113,18 @@ class NotificationsController extends AppController
 
 	}
 
+	public function deleteAll() {
+		
+		$result = $this->Notifications->deleteAll([
+				'user_id' => $this->Auth->user()['id']
+			]);
+
+		if(!$result) {
+			$this->error(__('Błąd serwera'));
+		}
+
+		$this->data(['ok' => 1]);
+
+	}
+
 }
