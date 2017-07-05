@@ -214,9 +214,40 @@ const actions = {
         bell : function() {
             setTimeout(function() {
                 if(!$('.notify-comment').length) {
-                    $('[data-ma-target="user-alerts"]').removeClass('active')
+                    $('[data-user-alert="sua-messages"]').removeClass('active')
                 }
             }, 300)
+        }
+
+    },
+
+    news : {
+
+        markAsRead : function(e) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            let item = $(e.currentTarget)
+
+            $.post('/notifications/mark-as-read/'+item.data('id'))
+            .done(function(data) {
+                let response = JSON.parse(data) 
+                if(typeof response.error == 'undefined') {
+                    item
+                        .closest('a')
+                        .fadeOut(240 , function() {
+                            $(this).remove()
+                        })
+                    actions.news.bell()
+                }
+            })            
+        }, 
+
+        bell : function() {
+             setTimeout(function() {
+                if(!$('.notify-drug').length) {
+                    $('[data-user-alert="sua-notifications"]').removeClass('active')
+                }
+            }, 300)           
         }
 
     },

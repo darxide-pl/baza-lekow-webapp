@@ -62,7 +62,7 @@
             <div class="list-group lg-alt c-overflow">
 
                 <?php foreach((array) $newDrugs as $v): ?>
-                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media">
+                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media notify-drug">
                         <div class="pull-left">
                             <i class="fa fa-fw fa-flask"></i>
                         </div>
