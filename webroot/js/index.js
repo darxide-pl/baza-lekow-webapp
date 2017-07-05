@@ -192,6 +192,7 @@ const actions = {
                         .fadeOut(240 , function() {
                             $(this).remove()
                         })
+                    actions.comments.bell()
                 }
             })
         },
@@ -205,8 +206,17 @@ const actions = {
                         .fadeOut(240, function() {
                             $(this).remove()
                         })
+                    actions.comments.bell()
                 }
             })
+        }, 
+
+        bell : function() {
+            setTimeout(function() {
+                if(!$('.notify-comment').length) {
+                    $('[data-ma-target="user-alerts"]').removeClass('active')
+                }
+            }, 300)
         }
 
     },

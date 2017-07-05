@@ -4,7 +4,7 @@
     </div>
 
     <ul class="smm-alerts">
-        <li data-user-alert="sua-messages" data-ma-action="sidebar-open" data-ma-target="user-alerts">
+        <li data-user-alert="sua-messages" class="<?= count((array) $newComments) ? 'active' : '' ?>" data-ma-action="sidebar-open" data-ma-target="user-alerts">
             <i class="fa fa-fw fa-comments"></i>
         </li>
         <li data-user-alert="sua-notifications" data-ma-action="sidebar-open" data-ma-target="user-alerts">
