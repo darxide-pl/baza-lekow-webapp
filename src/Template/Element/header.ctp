@@ -1,8 +1,8 @@
 <header id="header" class="media">
     <div class="pull-left h-logo">
         <a href="index-2.html" class="hidden-xs">
-            Material
-            <small>admin extended</small>
+            <i class="fa fa-fw fa-flask brand"></i>
+            <small><?= __('Baza leków') ?></small>
         </a>
 
         <div class="menu-collapse" data-ma-action="sidebar-open" data-ma-target="main-menu">
