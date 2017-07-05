@@ -172,6 +172,32 @@ const actions = {
                         })
                 }
             })
+        }, 
+
+        bulkFollow : function() {
+
+            let checked = $('.bulk-action:checked')
+
+            if(!checked.length) {
+                return flash.error('Nie zaznaczono żadnych leków do śledzenia')
+            }
+
+            $.post('/drugs/bulk-follow' ,{
+                items : $.map(checked , function(item) {
+                    return $(item).val()
+                })
+            }).done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    $.map(checked , function(item) {
+                        let v = $(item).val()
+                        $('[data-action="follow"][data-id="'+v+'"]')
+                            .data('action' , 'unfollow')
+                            .text('Nie powiadamiaj o aktualizacji')
+                    })
+                }
+            })
+
         }
 
     },

@@ -114,7 +114,9 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a href="#"><?= __('Powiadom o aktualizacji zaznaczonych leków') ?></a>
+                        <a href="javascript:void(0)" class="btn-action" data-controller="drugs" data-action="bulkFollow">
+                            <?= __('Powiadom o aktualizacji zaznaczonych leków') ?>        
+                        </a>
                     </li>
                 </ul>
             </li>
@@ -127,7 +129,7 @@
             <div class="list-group-item media">
                 <div class="checkbox pull-left lgi-checkbox">
                     <label>
-                        <input type="checkbox" value="">
+                        <input type="checkbox" class="bulk-action" value="<?= $v->id ?>" />
                         <i class="input-helper"></i>
                     </label>
                 </div>

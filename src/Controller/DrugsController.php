@@ -506,4 +506,33 @@ class DrugsController extends AppController
 
 	}
 
+	public function bulkFollow() {
+		
+		$t = $this->request->getData();
+		$this->loadModel('Follows');
+		$this->loadComponent('User');
+
+		if(!$this->User->isLoged()) {
+			$this->error(__('Opcja tylko dla zalogowanych'));
+		}
+
+		if(!isset($t['items'])) {
+			$this->error(__('Nie zaznaczono żadnych leków do śledzenia'));
+		}
+
+		if(!count((array) $t['items'])) {
+			$this->error(__('Nie zaznaczono żadnych leków do śledzenia'));
+		}
+
+		foreach((array) $t['items'] as $v) {
+			$e = $this->Follows->newEntity();
+			$e->user_id = $this->Auth->user()['id'];
+			$e->drug_id = $v;
+			$this->Follows->save($e);
+		}
+
+		$this->success(__('Będziesz powiadamiany o aktualizacjach wybranych leków'));
+
+	}
+
 }
