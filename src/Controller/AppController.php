@@ -91,7 +91,31 @@ class AppController extends Controller
             Cache::write('robots' , $query, 'halfhour');
         }
 
-        $this->set(compact('robots_avg', 'robots'));
+        $this->loadModel('Notifications');
+
+        $newComments = $this
+            ->Notifications
+            ->find('all')
+            ->where([
+                    'Notifications.user_id' => $this->Auth->user()['id'] ?? 0, 
+                    'type' => 1, 
+                    'is_read' => 0
+                ])
+            ->contain(['comments', 'drugs'])
+            ->toArray();
+
+        $newActualizations = $this
+            ->Notifications
+            ->find('all')
+            ->where([
+                    'Notifications.user_id' => $this->Auth->user()['id'] ?? 0, 
+                    'type' => 2, 
+                    'is_read' => 0
+                ])
+            ->contain(['drugs'])
+            ->toArray();            
+
+        $this->set(compact('robots_avg', 'robots', 'newComments', 'newActualizations'));
 
         /*
          * Enable the following components for recommended CakePHP security settings.

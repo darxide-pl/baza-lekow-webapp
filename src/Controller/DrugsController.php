@@ -390,6 +390,9 @@ class DrugsController extends AppController
 			return $this->redirect($this->referer());
 		}
 
+		$drug->views = $drug->views +1;
+		$this->Drugs->save($drug);
+
 		$info = TableRegistry::get('drug_description')
 			->find('all' , [
 					'conditions' => [
