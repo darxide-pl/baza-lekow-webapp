@@ -437,6 +437,9 @@ class DrugsController extends AppController
 				$this->Flash->error(__('Nie udało się zapisać komentarza'));
 			} else {
 				$this->Flash->success(__('komentarz zapisano'));
+
+				$this->loadComponent('Notification');
+				$this->Notification->comment($comment);
 			}
 
 			return $this->redirect($this->referer());
