@@ -20,14 +20,19 @@
     <div class="tab-content">
         <div class="tab-pane fade" id="sua-messages">
             <ul class="sua-menu list-inline list-unstyled palette-Light-Blue bg">
-                <li><a href="#"><i class="zmdi zmdi-check-all"></i> <?= __('Usuń wszystkie') ?></a></li>
+                <li>
+                    <a href="#" class="btn-action" data-controller="comments" data-action="readAll">
+                        <i class="zmdi zmdi-check-all"></i> 
+                        <?= __('Usuń wszystkie') ?>
+                    </a>
+                </li>
                 <li><a href="#" data-ma-action="sidebar-close"><i class="zmdi zmdi-close"></i> <?= __('Zamknij') ?></a></li>
             </ul>
 
             <div class="list-group lg-alt c-overflow">
 
                 <?php foreach((array) $newComments as $v): ?>
-                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media">
+                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media notify-comment">
                         <div class="pull-left">
                             <i class="fa fa-fw fa-comment"></i>
                         </div>

@@ -21,12 +21,33 @@ class NotificationsController extends AppController
 			$this->error(__('Nie znaleziono powiadomienia'));
 		}
 
+		if($e->user_id != $this->Auth->user()['id']) {
+			$this->error(__('Nie możesz oznaczyć cudzego powiadomienia jako przeczytane'));
+		}
+
 		$e->is_read = 1;
 
 		if($this->Notifications->save($e)) {
 			$this->data([
 					'ok' => 1
 				]);
+		}
+
+		$this->error(__('Błąd serwera'));
+
+	}
+
+	public function readAllComments() {
+		
+		$result = $this->Notifications->updateAll([
+				'is_read' => 1
+			], [
+				'user_id' => $this->Auth->user()['id'], 
+				'type' => 1
+			]);
+
+		if($result) {
+			$this->data($result);
 		}
 
 		$this->error(__('Błąd serwera'));

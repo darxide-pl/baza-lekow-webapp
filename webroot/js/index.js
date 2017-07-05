@@ -194,6 +194,19 @@ const actions = {
                         })
                 }
             })
+        },
+
+        readAll : function(e) {
+            $.post('/notifications/read-all-comments')
+            .done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    $('.notify-comment')
+                        .fadeOut(240, function() {
+                            $(this).remove()
+                        })
+                }
+            })
         }
 
     },
