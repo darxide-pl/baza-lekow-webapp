@@ -48,6 +48,14 @@
 	    top: 3px;
 	    right: 4px;    	
     }
+    &__description {
+    	position: absolute;
+    	left: 125px;
+    	top: 20px;
+    	font-size: 13px;
+    	font-weight: 600;
+    	color: #5e5e5e;    	
+    }
 }
 
 .robot {

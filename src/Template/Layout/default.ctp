@@ -21,7 +21,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Material Admin</title>
+    <title><?= h(__('Baza leków')) ?></title>
     
     <!-- Vendor CSS -->
     <link href="/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link href="/vendors/bower_components/google-material-color/dist/palette.css" rel="stylesheet">
     <link href="/vendors/bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/vendors/fa/css/font-awesome.min.css" />
-        
+
     <!-- CSS -->
     <link href="/css/app.min.1.css" rel="stylesheet">
     <link href="/css/app.min.2.css" rel="stylesheet">

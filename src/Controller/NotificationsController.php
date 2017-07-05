@@ -9,6 +9,27 @@ use Cake\ORM\TableRegistry;
 class NotificationsController extends AppController
 {
 
+	public function index() {
+		
+		$this->loadComponent('User');
+
+		if(!$this->User->isLoged()) {
+			$this->Flash->error(__('Tylko dla zalogowanych'));
+			return $this->redirect($this->referer());
+		}
+
+		$notifications = $this->Notifications->find('all' , [
+				'conditions' => [
+					'Notifications.user_id' => $this->Auth->user()['id']
+				], 
+				'contain' => ['Drugs', 'Comments']
+			])
+		->toArray();
+
+		$this->set(compact('notifications'));
+
+	}
+
 	public function markAsRead($id = NULL) {
 		
 		if(is_null($id)) {
