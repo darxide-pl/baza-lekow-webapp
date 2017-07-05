@@ -32,7 +32,7 @@
             <div class="list-group lg-alt c-overflow">
 
                 <?php foreach((array) $newComments as $v): ?>
-                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media notify-comment">
+                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media notify-comment" data-id="<?= $v->id ?>">
                         <div class="pull-left">
                             <i class="fa fa-fw fa-comment"></i>
                         </div>
@@ -62,7 +62,7 @@
             <div class="list-group lg-alt c-overflow">
 
                 <?php foreach((array) $newDrugs as $v): ?>
-                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media notify-drug">
+                    <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->drug_id]) ?>" class="list-group-item media notify-drug" data-id="<?= $v->id ?>">
                         <div class="pull-left">
                             <i class="fa fa-fw fa-flask"></i>
                         </div>

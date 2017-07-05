@@ -92,4 +92,25 @@ class NotificationsController extends AppController
 
 	}	
 
+	public function delete($id = NULL) {
+		
+		if(is_null($id)) {
+			$this->error(__('Nie znaleziono powiadomienia'));
+		}
+
+		$e = $this->Notifications->findById($id)->first();
+
+		if(is_null($e)) {
+			$this->error(__('Nie znaleziono powiadomienia'));
+		}
+
+		if($e->user_id != $this->Auth->user()['id']) {
+			$this->error(__('Brak uprawnień'));
+		}
+
+		$this->Notifications->delete($e);
+		$this->data(['ok' => 1]);
+
+	}
+
 }

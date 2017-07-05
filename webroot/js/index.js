@@ -187,8 +187,7 @@ const actions = {
             .done(function(data) {
                 let response = JSON.parse(data) 
                 if(typeof response.error == 'undefined') {
-                    item
-                        .closest('a')
+                    $('.notify-comment[data-id="'+item.data('id')+'"]')
                         .fadeOut(240 , function() {
                             $(this).remove()
                         })
@@ -232,8 +231,7 @@ const actions = {
             .done(function(data) {
                 let response = JSON.parse(data) 
                 if(typeof response.error == 'undefined') {
-                    item
-                        .closest('a')
+                    $('.notify-drug[data-id="'+item.data('id')+'"]')
                         .fadeOut(240 , function() {
                             $(this).remove()
                         })
@@ -262,6 +260,30 @@ const actions = {
                     $('[data-user-alert="sua-notifications"]').removeClass('active')
                 }
             }, 300)           
+        }
+
+    },
+
+    notifications : {
+
+        delete : function(e) {
+            let item = $(e.currentTarget)
+            $.post('/notifications/delete/'+item.data('id'))
+            .done(function(data) {
+                let response = JSON.parse(data)
+                if(typeof response.error == 'undefined') {
+                    item
+                        .closest('.col-md-4')
+                        .fadeOut(240 , function() {
+                            $(this).remove()
+                        })
+
+                    $('.notify-comment[data-id="'+item.data('id')+'"]').remove()
+                    $('.notify-drug[data-id="'+item.data('id')+'"]').remove()
+                    actions.comments.bell()
+                    actions.news.bell()
+                }
+            })
         }
 
     },
