@@ -104,7 +104,7 @@ class AppController extends Controller
             ->contain(['comments', 'drugs'])
             ->toArray();
 
-        $newActualizations = $this
+        $newDrugs = $this
             ->Notifications
             ->find('all')
             ->where([
@@ -115,7 +115,7 @@ class AppController extends Controller
             ->contain(['drugs'])
             ->toArray();            
 
-        $this->set(compact('robots_avg', 'robots', 'newComments', 'newActualizations'));
+        $this->set(compact('robots_avg', 'robots', 'newComments', 'newDrugs'));
 
         /*
          * Enable the following components for recommended CakePHP security settings.

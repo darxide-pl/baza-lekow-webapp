@@ -36,7 +36,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'notifications']) ?>">
+                        <a href="<?= $this->Url->build(['controller' => 'Notifications', 'action' => 'index']) ?>">
                             <?= __('Powiadomienia') ?>
                         </a>
                     </li>
