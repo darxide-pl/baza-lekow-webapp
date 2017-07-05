@@ -150,7 +150,7 @@ const actions = {
                 id : item.data('id')
             }).done(function(data) {
                 let response = JSON.parse(data)
-                if(typeof response.errosr == 'undefined') {
+                if(typeof response.error == 'undefined') {
                     item
                         .data('action', 'follow')
                         .text('Powiadom o aktualizacji')
@@ -167,6 +167,28 @@ const actions = {
                 if(typeof response.success != 'undefined') {
                     item
                         .closest('.list-group-item')
+                        .fadeOut(240 , function() {
+                            $(this).remove()
+                        })
+                }
+            })
+        }
+
+    },
+
+    comments : {
+
+        markAsRead : function(e) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            let item = $(e.currentTarget)
+
+            $.post('/notifications/mark-as-read/'+item.data('id'))
+            .done(function(data) {
+                let response = JSON.parse(data) 
+                if(typeof response.error == 'undefined') {
+                    item
+                        .closest('a')
                         .fadeOut(240 , function() {
                             $(this).remove()
                         })
