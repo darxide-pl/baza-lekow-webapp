@@ -358,7 +358,8 @@ class DrugsController extends AppController
 		$drugs = $this->paginate('Drugs', [
 				'fields' => $config['fields'],
 				'contain' => [
-					'Categories'
+					'Categories', 
+					'Comments'
 				], 
 				'join' => $config['join'], 
 				'conditions' => $config['conditions'], 

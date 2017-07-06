@@ -170,7 +170,11 @@
                 </div>
 
                 <div class="media-body">
-                    <div class="lgi-heading"><?= $v->name ?></div>
+                    <div class="lgi-heading">
+                        <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'view', $v->id]) ?>">
+                            <?= $v->name ?>
+                        </a>
+                    </div>
                     <small class="lgi-text">
                         <i class="zmdi zmdi-calendar-check"></i>
                         <?= $v->last_modify->i18nFormat('yLLLd') ?>
@@ -183,6 +187,14 @@
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
+                                <?php if(count((array) $v->comments)): ?>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <i class="fa fa-fw fa-comments"></i>
+                                            <?= count($v->comments) ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                         <?php endif; ?>
                     </small>

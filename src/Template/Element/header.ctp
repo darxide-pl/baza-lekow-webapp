@@ -1,6 +1,6 @@
 <header id="header" class="media">
     <div class="pull-left h-logo">
-        <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'index']) ?>" class="hidden-xs">
+        <a href="<?= $this->Url->build(['controller' => 'Drugs', 'action' => 'indexk']) ?>" class="hidden-xs">
             <i class="fa fa-fw fa-flask brand"></i>
             <small><?= __('Baza leków') ?></small>
         </a>
